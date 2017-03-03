@@ -9,7 +9,7 @@ public class Job {
     private String mTitle;
     private String mDescription;
     private Date mDate;
-    private boolean mHourlyPay;
+    private boolean mPaidHourly;
     private Currency mCompensation;
 
     public String getTitle() {
@@ -36,12 +36,12 @@ public class Job {
         this.mDate = date;
     }
 
-    public boolean isHourlyPay() {
-        return mHourlyPay;
+    public boolean isPaidHourly() {
+        return mPaidHourly;
     }
 
-    public void setHourlyPay(boolean hourlyPay) {
-        this.mHourlyPay = hourlyPay;
+    public void setPaidHourly(boolean paidHourly) {
+        this.mPaidHourly = paidHourly;
     }
 
     public Currency getCompensation() {
