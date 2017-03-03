@@ -2,8 +2,10 @@ package com.osu.cse5236.oddjobs;
 
 import java.util.Currency;
 import java.util.Date;
+import java.util.UUID;
 
 public class Job {
+    private UUID mId;
     private String mTitle;
     private String mDescription;
     private Date mDate;
@@ -51,6 +53,7 @@ public class Job {
     }
 
     public Job() {
+        mId = UUID.randomUUID();
         mDate = new Date();
     }
 }

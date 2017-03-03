@@ -2,11 +2,14 @@ package com.osu.cse5236.oddjobs;
 
 import android.provider.ContactsContract;
 
+import java.util.UUID;
+
 /**
  * Created by zenit on 3/3/2017.
  */
 
 public class User {
+    private UUID mId;
     private String mFirstName;
     private String mLastName;
     private String mEmail; // TODO: find a standard type for email addresses
@@ -45,6 +48,6 @@ public class User {
     }
 
     public User() {
-
+        mId = UUID.randomUUID();
     }
 }
