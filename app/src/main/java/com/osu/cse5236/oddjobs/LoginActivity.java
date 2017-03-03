@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d(TAG, "SignIn button clicked)");
                 Intent intent = new Intent(LoginActivity.this, ListingsActivity.class);
                 startActivity(intent);
+                // TODO: Uncomment next line and make it still work
                 //attemptLogin();
             }
         });
