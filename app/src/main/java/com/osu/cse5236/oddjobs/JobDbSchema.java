@@ -12,5 +12,7 @@ public class JobDbSchema {
         public static final String DATE = "date";
         public static final String PAID_HOURLY = "paidHourly";
         public static final String COMPENSATION = "compensation";
+        public static final String POSTER = "poster";
+        public static final String VOLUNTEER = "volunteer";
     }
 }

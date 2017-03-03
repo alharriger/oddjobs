@@ -11,6 +11,8 @@ public class Job {
     private Date mDate;
     private boolean mPaidHourly;
     private Currency mCompensation;
+    private User mPoster;
+    private User mVolunteer;
 
     public String getTitle() {
         return mTitle;
@@ -50,6 +52,26 @@ public class Job {
 
     public void setCompensation(Currency compensation) {
         this.mCompensation = compensation;
+    }
+
+    public User getVolunteer() {
+        return mVolunteer;
+    }
+
+    public void setVolunteer(User volunteer) {
+        this.mVolunteer = volunteer;
+    }
+
+    public User getPoster() {
+        return mPoster;
+    }
+
+    public void setPoster(User poster) {
+        this.mPoster = poster;
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public Job() {

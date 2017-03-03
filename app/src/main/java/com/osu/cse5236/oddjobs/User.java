@@ -2,6 +2,7 @@ package com.osu.cse5236.oddjobs;
 
 import android.provider.ContactsContract;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,6 +15,8 @@ public class User {
     private String mLastName;
     private String mEmail; // TODO: find a standard type for email addresses
     private String mPhone; // TODO: find a standard type or better type for phone numbers
+    private List<Job> mPosted;
+    private List<Job> mVolunteeredFor;
 
     public String getFirstName() {
         return mFirstName;
@@ -45,6 +48,26 @@ public class User {
 
     public void setPhone(String phone) {
         mPhone = phone;
+    }
+
+    public List<Job> getPosted() {
+        return mPosted;
+    }
+
+    public void setPosted(List<Job> posted) {
+        mPosted = posted;
+    }
+
+    public List<Job> getVolunteeredFor() {
+        return mVolunteeredFor;
+    }
+
+    public void setVolunteeredFor(List<Job> volunteeredFor) {
+        mVolunteeredFor = volunteeredFor;
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public User() {
