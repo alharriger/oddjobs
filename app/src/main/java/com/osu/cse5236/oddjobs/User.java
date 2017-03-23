@@ -13,8 +13,9 @@ public class User {
     private UUID mId;
     private String mFirstName;
     private String mLastName;
-    private String mEmail; // TODO: find a standard type for email addresses
-    private String mPhone; // TODO: find a standard type or better type for phone numbers
+    private String mEmail;
+    private ContactsContract.CommonDataKinds.Phone mPhone;
+    private String mPassword;
     private List<Job> mPosted;
     private List<Job> mVolunteeredFor;
 
@@ -42,13 +43,17 @@ public class User {
         mEmail = email;
     }
 
-    public String getPhone() {
+    public  ContactsContract.CommonDataKinds.Phone getPhone() {
         return mPhone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone( ContactsContract.CommonDataKinds.Phone phone) {
         mPhone = phone;
     }
+
+    public String getPassword() { return mPassword; }
+
+    public void setPassword(String password) { mPassword = password; }
 
     public List<Job> getPosted() {
         return mPosted;

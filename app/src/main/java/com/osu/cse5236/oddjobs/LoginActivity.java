@@ -31,8 +31,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+
 import java.util.ArrayList;
 import java.util.List;
+
+// java email
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.*;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -42,7 +50,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     private static final String TAG = "LoginActivity";
-
+    private SQLiteDatabase mDatabase;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -95,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Intent intent = new Intent(LoginActivity.this, ListingsActivity.class);
                 startActivity(intent);
                 // TODO: Uncomment next line and make it still work
-                //attemptLogin();
+                attemptLogin();
             }
         });
 
@@ -162,8 +170,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = mEmailView.getText().toString().trim();
+        String password = mPasswordView.getText().toString().trim();
 
         boolean cancel = false;
         View focusView = null;
@@ -199,14 +207,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    // Use this one when we actually want to validate real email addresses.
+    /*
+    public static boolean isEmailValid(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    } */
+
+
+    // Use this one for testing.
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
+
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        // last statement checks if the password has any uppercase letters.
+
+        return password.length() > 6 && password.length() < 20 && !password.equals(password.toLowerCase());
     }
 
     /**
@@ -332,7 +357,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
 
-            // TODO: register the new account here.
+            int x = 0;
+            User user = new User();
+            SQLiteDatabase oddJobsDB = openOrCreateDatabase("oddJobs",MODE_PRIVATE,null);
+            oddJobsDB.beginTransaction();
+            ContentValues values = new ContentValues();
+            if (isEmailValid(mEmail)) {
+                // TODO: add it to the Database as well
+                user.setEmail(mEmail);
+                values.put("email", user.getEmail());
+                x++;
+            }
+            if (isPasswordValid(mPassword)) {
+                // TODO: add it to the Database as well
+                user.setPassword(mPassword);
+                values.put("password", user.getPassword());
+                x++;
+            }
+            oddJobsDB.insert("users", null, values);
+            oddJobsDB.endTransaction();
+            if (x == 2){
+                Log.d(TAG, "New User Created!");
+            }
             return true;
         }
 
