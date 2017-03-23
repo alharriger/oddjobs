@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     private static final String TAG = "LoginActivity";
-
+    private SQLiteDatabase mDatabase;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Intent intent = new Intent(LoginActivity.this, ListingsActivity.class);
                 startActivity(intent);
                 // TODO: Uncomment next line and make it still work
-                //attemptLogin();
+                attemptLogin();
             }
         });
 
@@ -162,8 +164,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = mEmailView.getText().toString().trim();
+        String password = mPasswordView.getText().toString().trim();
 
         boolean cancel = false;
         View focusView = null;
@@ -201,12 +203,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
+
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        // last statement checks if the password has any uppercase letters.
+
+        return password.length() > 6 && password.length() < 20 && !password.equals(password.toLowerCase());
     }
 
     /**
@@ -332,7 +336,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
 
-            // TODO: register the new account here.
+            int x = 0;
+            User user = new User();
+            if (isEmailValid(mEmail)) {
+                // TODO: add it to the Database as well
+                user.setEmail(mEmail);
+                x++;
+            }
+            if (isPasswordValid(mPassword)) {
+                // TODO: add it to the Database as well
+                user.setPassword(mPassword);
+                x++;
+            }
+            if (x == 2){
+                Log.d(TAG, "New User Created!");
+            }
             return true;
         }
 
