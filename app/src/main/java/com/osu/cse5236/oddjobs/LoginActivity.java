@@ -32,9 +32,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
 
 import java.util.ArrayList;
 import java.util.List;
+
+// java email
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.*;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -201,6 +207,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    // Use this one when we actually want to validate real email addresses.
+    /*
+    public static boolean isEmailValid(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    } */
+
+
+    // Use this one for testing.
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
 
@@ -338,16 +359,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             int x = 0;
             User user = new User();
+            SQLiteDatabase oddJobsDB = openOrCreateDatabase("oddJobs",MODE_PRIVATE,null);
+            oddJobsDB.beginTransaction();
+            ContentValues values = new ContentValues();
             if (isEmailValid(mEmail)) {
                 // TODO: add it to the Database as well
                 user.setEmail(mEmail);
+                values.put("email", user.getEmail());
                 x++;
             }
             if (isPasswordValid(mPassword)) {
                 // TODO: add it to the Database as well
                 user.setPassword(mPassword);
+                values.put("password", user.getPassword());
                 x++;
             }
+            oddJobsDB.insert("users", null, values);
+            oddJobsDB.endTransaction();
             if (x == 2){
                 Log.d(TAG, "New User Created!");
             }
