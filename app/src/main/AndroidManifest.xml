@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListingsActivity"></activity>
+        <activity android:name=".NewJobActivity"></activity>
     </application>
 
 </manifest>

@@ -1,27 +1,30 @@
 package com.osu.cse5236.oddjobs;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class ListingsActivity extends AppCompatActivity {
-    private static final String TAG = "ListingsActivity";
+/**
+ * Created by zenit on 3/24/2017.
+ */
+
+public class NewJobActivity extends AppCompatActivity {
+    private static final String TAG = "NewJobActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
-        setContentView(R.layout.activity_listings);
-        Button mCreateNewJobButton = (Button) findViewById(R.id.create_new_job_button);
+        setContentView(R.layout.activity_new_job);
+        Button mCreateNewJobButton = (Button) findViewById(R.id.create_job_button);
         mCreateNewJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Create new job button clicked)");
-                Intent intent = new Intent(ListingsActivity.this, NewJobActivity.class);
-                startActivity(intent);
+                /* TODO: Create a new job and go back to listings */
             }
         });
     }

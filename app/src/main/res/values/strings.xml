@@ -15,6 +15,9 @@
     </string>
 
     <!--Strings for job listings-->
+    <string name="create_new_job_button">Create New Job</string>
+
+    <!--Strings for creating a new job listing-->
     <string name="job_title_label">Title</string>
     <string name="job_title_hint">Enter a title for this job.</string>
     <string name="job_description_label">Description</string>
