@@ -374,7 +374,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 values.put("password", user.getPassword());
                 x++;
             }
-            oddJobsDB.insert("users", null, values);
+            //oddJobsDB.insert("users", null, values);
             oddJobsDB.endTransaction();
             if (x == 2){
                 Log.d(TAG, "New User Created!");
