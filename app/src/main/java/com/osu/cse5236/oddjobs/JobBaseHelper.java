@@ -26,6 +26,8 @@ public class JobBaseHelper extends SQLiteOpenHelper {
                 JobTable.Cols.COMPENSATION + ", " +
                 JobTable.Cols.POSTER + ", " +
                 JobTable.Cols.VOLUNTEER);
+        // TODO: Add a "finished" column for Job to indicate when Job is done?
+        // ^ as well as all the supporting widgets and views
     }
 
     @Override

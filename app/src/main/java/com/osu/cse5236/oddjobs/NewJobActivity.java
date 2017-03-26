@@ -1,6 +1,5 @@
 package com.osu.cse5236.oddjobs;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,7 +23,8 @@ public class NewJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Create new job button clicked)");
-                /* TODO: Create a new job and go back to listings */
+                /* TODO: Create a new job */
+                finish();
             }
         });
     }

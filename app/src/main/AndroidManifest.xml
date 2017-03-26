@@ -16,14 +16,21 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
+        </activity>
+        <activity android:name=".ListingsActivity"></activity>
+        <activity android:name=".JobListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListingsActivity"></activity>
-        <activity android:name=".NewJobActivity"></activity>
+        <activity
+            android:name=".NewJobActivity">
+        </activity>
+        <activity
+            android:name=".JobPagerActivity"
+            android:parentActivityName=".JobListActivity">
+        </activity>
     </application>
 
 </manifest>

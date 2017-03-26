@@ -1,6 +1,5 @@
 package com.osu.cse5236.oddjobs;
 
-import java.util.Currency;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,9 +9,19 @@ public class Job {
     private String mDescription;
     private Date mDate;
     private boolean mPaidHourly;
-    private Currency mCompensation;
-    private User mPoster;
-    private User mVolunteer;
+    private Float mCompensation;
+    private String mPoster;
+    private String mVolunteer;
+
+    public Job(UUID id) {
+        mId = id;
+        mDate = new Date();
+    }
+
+    public Job() {
+        mId = UUID.randomUUID();
+        mDate = new Date();
+    }
 
     public String getTitle() {
         return mTitle;
@@ -46,27 +55,27 @@ public class Job {
         this.mPaidHourly = paidHourly;
     }
 
-    public Currency getCompensation() {
+    public Float getCompensation() {
         return mCompensation;
     }
 
-    public void setCompensation(Currency compensation) {
+    public void setCompensation(Float compensation) {
         this.mCompensation = compensation;
     }
 
-    public User getVolunteer() {
+    public String getVolunteer() {
         return mVolunteer;
     }
 
-    public void setVolunteer(User volunteer) {
+    public void setVolunteer(String volunteer) {
         this.mVolunteer = volunteer;
     }
 
-    public User getPoster() {
+    public String getPoster() {
         return mPoster;
     }
 
-    public void setPoster(User poster) {
+    public void setPoster(String poster) {
         this.mPoster = poster;
     }
 
@@ -74,8 +83,4 @@ public class Job {
         return mId;
     }
 
-    public Job() {
-        mId = UUID.randomUUID();
-        mDate = new Date();
-    }
 }
