@@ -17,7 +17,8 @@ import java.util.UUID;
  */
 
 public class JobPagerActivity extends AppCompatActivity {
-    private static final String EXTRA_JOB_ID = "com.osu.cse5236.oddjobs.job_id";
+
+    private static final String EXTRA_JOB_ID = "com.osu.oddjobs2.job_id";
 
     private ViewPager mViewPager;
     private List<Job> mJobs;
@@ -51,5 +52,12 @@ public class JobPagerActivity extends AppCompatActivity {
                 return mJobs.size();
             }
         });
+
+        for (int i = 0; i < mJobs.size(); i++) {
+            if (mJobs.get(i).getId().equals(jobId)) {
+                mViewPager.setCurrentItem(i);
+                break;
+            }
+        }
     }
 }

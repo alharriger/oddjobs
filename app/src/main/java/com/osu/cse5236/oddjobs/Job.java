@@ -6,21 +6,17 @@ import java.util.UUID;
 public class Job {
     private UUID mId;
     private String mTitle;
+    private Float mCompensation;
     private String mDescription;
     private Date mDate;
-    private boolean mPaidHourly;
-    private Float mCompensation;
-    private String mPoster;
-    private String mVolunteer;
+    private boolean mCompleted;
 
-    public Job(UUID id) {
-        mId = id;
-        mDate = new Date();
+    public UUID getId() {
+        return mId;
     }
 
-    public Job() {
-        mId = UUID.randomUUID();
-        mDate = new Date();
+    public void setId(UUID id) {
+        this.mId = id;
     }
 
     public String getTitle() {
@@ -29,6 +25,14 @@ public class Job {
 
     public void setTitle(String title) {
         this.mTitle = title;
+    }
+
+    public Float getCompensation() {
+        return mCompensation;
+    }
+
+    public void setCompensation(Float compensation) {
+        this.mCompensation = compensation;
     }
 
     public String getDescription() {
@@ -47,40 +51,20 @@ public class Job {
         this.mDate = date;
     }
 
-    public boolean isPaidHourly() {
-        return mPaidHourly;
+    public boolean isCompleted() {
+        return mCompleted;
     }
 
-    public void setPaidHourly(boolean paidHourly) {
-        this.mPaidHourly = paidHourly;
+    public void setCompleted(boolean completed) {
+        this.mCompleted = completed;
     }
 
-    public Float getCompensation() {
-        return mCompensation;
+    public Job() {
+        mId = UUID.randomUUID();
     }
 
-    public void setCompensation(Float compensation) {
-        this.mCompensation = compensation;
+    public Job(UUID id) {
+        mId = id;
+        mDate = new Date();
     }
-
-    public String getVolunteer() {
-        return mVolunteer;
-    }
-
-    public void setVolunteer(String volunteer) {
-        this.mVolunteer = volunteer;
-    }
-
-    public String getPoster() {
-        return mPoster;
-    }
-
-    public void setPoster(String poster) {
-        this.mPoster = poster;
-    }
-
-    public UUID getId() {
-        return mId;
-    }
-
 }
