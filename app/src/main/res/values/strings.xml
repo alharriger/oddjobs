@@ -14,16 +14,16 @@
         completions."
     </string>
 
-    <!--Strings for job listings-->
+    <!-- Strings for job listings -->
     <string name="create_new_job_button">Create New Job</string>
 
-    <!--Strings for creating a new job listing-->
+    <!-- Strings for creating a new job listing -->
+    <string name="job_title_hint">Enter a title for the job.</string>
     <string name="job_title_label">Title</string>
-    <string name="job_title_hint">Enter a title for this job.</string>
     <string name="job_description_label">Description</string>
-    <string name="job_description_hint">Describe this job.</string>
-    <string name="job_compensation_label">Compensation</string>
-    <string name="job_compensation_hint">How much will you pay for this?</string>
-    <string name="job_poster_label">Poster</string>
-    <string name="job_create_button">Create Job</string>
+    <string name="job_completed_label">Completed</string>
+    <string name="job_volunteer_button">Volunteer</string>
+
+    <!-- Toolbar -->
+    <string name="new_job">New Job</string>
 </resources>
