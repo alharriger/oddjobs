@@ -130,11 +130,12 @@ public class NewUserActivity extends AppCompatActivity {
                 mUser.setLastName(enteredLastName);
                 mUser.setPhone(enteredPhone);
                 mUser.setEmail(enteredEmail);
-                if (enteredPassword.equals(enteredConfirmPassword)) {
-                    mUser.setPassword(enteredPassword);
-                }
-                else {
-                    Log.d(TAG, "Passwords not Matching");
+                if (enteredPassword != null) {
+                    if (enteredPassword.equals(enteredConfirmPassword)) {
+                        mUser.setPassword(enteredPassword);
+                    } else {
+                        Log.d(TAG, "Passwords not Matching");
+                    }
                 }
                 UserCollection.get(mContext).addUser(mUser);
                 finish();
