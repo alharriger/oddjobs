@@ -26,9 +26,11 @@ public class JobDetailsFragment extends Fragment {
 
     private Job mJob;
     private TextView mTitleView;
+    private TextView mPosterView;
     private TextView mCompensationView;
     private TextView mDescriptionView;
     private Button mVolunteerButton;
+    private TextView mVolunteerView;
     private CheckBox mCompletedCheckbox;
     private Button mEditButton;
 
@@ -65,6 +67,11 @@ public class JobDetailsFragment extends Fragment {
         mTitleView = (TextView) v.findViewById(R.id.job_title);
         mTitleView.setText(mJob.getTitle());
 
+        mPosterView = (TextView) v.findViewById(R.id.job_poster);
+        if (mJob.getPoster() != null) {
+            mPosterView.setText(mJob.getPoster());
+        }
+
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
         if (mJob.getCompensation() != null) {
             mCompensationView.setText(mJob.getCompensation().toString());
@@ -77,6 +84,11 @@ public class JobDetailsFragment extends Fragment {
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
+
+        mVolunteerView = (TextView) v.findViewById(R.id.job_poster);
+        if (mJob.getVolunteer() != null) {
+            mVolunteerView.setText(mJob.getVolunteer());
+        }
 
         mCompletedCheckbox = (CheckBox)v.findViewById(R.id.job_completed);
         mCompletedCheckbox.setChecked(mJob.isCompleted());
