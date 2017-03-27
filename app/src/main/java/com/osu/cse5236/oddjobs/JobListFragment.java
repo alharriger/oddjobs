@@ -80,9 +80,13 @@ public class JobListFragment extends Fragment{
         List<Job> jobs = jobCollection.getJobs();
 
         if (mAdapter == null) {
+            Log.d(TAG, "in updateUI(), mAdapter == null");
             mAdapter = new JobAdapter(jobs);
             mJobRecyclerView.setAdapter(mAdapter);
         } else {
+            Log.d(TAG, "in updateUI(), mAdapter != null");
+            mAdapter.mJobs.clear();
+            mAdapter.mJobs.addAll(jobs);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -104,6 +108,7 @@ public class JobListFragment extends Fragment{
 
         public JobHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_job, parent, false));
+            Log.d(TAG, SUB_TAG + "'s constructor called");
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.job_title);
 //            mCompensationTextView = (TextView) itemView.findViewById(R.id.job_compensation);

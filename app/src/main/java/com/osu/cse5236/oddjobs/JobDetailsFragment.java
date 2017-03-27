@@ -1,5 +1,6 @@
 package com.osu.cse5236.oddjobs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,24 +18,28 @@ import java.util.UUID;
  * Created by Zenith on 3/24/2017.
  */
 
-public class JobFragment extends Fragment {
+public class JobDetailsFragment extends Fragment {
 
+    private static final String TAG = "JobDetailsFragment RAWR";
     private static final String ARG_JOB_ID = "job_id";
-    private static final String TAG = "JobFragment RAWR";
+    private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private Job mJob;
     private TextView mTitleView;
+    private TextView mPosterView;
     private TextView mCompensationView;
     private TextView mDescriptionView;
     private Button mVolunteerButton;
+    private TextView mVolunteerView;
     private CheckBox mCompletedCheckbox;
+    private Button mEditButton;
 
-    public static JobFragment newInstance(UUID jobId) {
+    public static JobDetailsFragment newInstance(UUID jobId) {
         Log.d(TAG, "newInstance() called");
         Bundle args = new Bundle();
         args.putSerializable(ARG_JOB_ID, jobId);
 
-        JobFragment fragment = new JobFragment();
+        JobDetailsFragment fragment = new JobDetailsFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,19 +62,33 @@ public class JobFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() called");
-        View v = inflater.inflate(R.layout.fragment_job, container, false);
+        View v = inflater.inflate(R.layout.fragment_job_details, container, false);
 
         mTitleView = (TextView) v.findViewById(R.id.job_title);
         mTitleView.setText(mJob.getTitle());
 
+        mPosterView = (TextView) v.findViewById(R.id.job_poster);
+        if (mJob.getPoster() != null) {
+            mPosterView.setText(mJob.getPoster());
+        }
+
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
-        mCompensationView.setText(mJob.getCompensation().toString());
+        if (mJob.getCompensation() != null) {
+            mCompensationView.setText(mJob.getCompensation().toString());
+        }
 
         mDescriptionView = (TextView) v.findViewById(R.id.job_description);
-        mDescriptionView.setText(mJob.getDescription());
+        if (mJob.getDescription() != null) {
+            mDescriptionView.setText(mJob.getDescription());
+        }
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
+
+        mVolunteerView = (TextView) v.findViewById(R.id.job_poster);
+        if (mJob.getVolunteer() != null) {
+            mVolunteerView.setText(mJob.getVolunteer());
+        }
 
         mCompletedCheckbox = (CheckBox)v.findViewById(R.id.job_completed);
         mCompletedCheckbox.setChecked(mJob.isCompleted());
@@ -77,6 +96,18 @@ public class JobFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setCompleted(isChecked);
+            }
+        });
+
+        mEditButton = (Button) v.findViewById(R.id.edit_job_button);
+        mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Edit button clicked");
+                Intent intent = EditJobActivity.newIntent(getActivity(), mJob.getId());
+                JobCollection.editJob = mJob.getId();
+                intent.putExtra(EXTRA_JOB_ID, mJob.getId());
+                startActivity(intent);
             }
         });
 

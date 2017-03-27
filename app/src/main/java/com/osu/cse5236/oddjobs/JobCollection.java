@@ -22,6 +22,7 @@ public class JobCollection {
     private static final String TAG = "JobCollection RAWR";
 
     private static JobCollection sJobCollection;
+    public static UUID editJob; // not ideal; used to hold job edited in EditJobActivity
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
@@ -43,6 +44,12 @@ public class JobCollection {
         Log.d(TAG, "addJob() called");
         ContentValues values = getContentValues(j);
         mDatabase.insert(JobTable.NAME, null, values);
+    }
+
+    public void deleteJob(Job j) {
+        Log.d(TAG, "deleteJob() called");
+        ContentValues values = getContentValues(j);
+        mDatabase.delete(JobTable.NAME, "uuid=?", new String[] {String.valueOf(j.getId())});
     }
 
     public List<Job> getJobs() {
