@@ -5,13 +5,13 @@ import java.util.UUID;
 
 public class Job {
     private UUID mId;
-    private String mPoster;
+    private String mPoster = "";
     private String mTitle;
     private String mCompensation = "";
     private String mDescription;
     private Date mDate;
     private boolean mCompleted;
-    private String mVolunteer;
+    private String mVolunteer = "";
 
     public UUID getId() {
         return mId;
@@ -79,12 +79,16 @@ public class Job {
 
     public Job() {
         mId = UUID.randomUUID();
+        mPoster = "None (TODO attach to User)";
         mCompensation = "";
+        mVolunteer = "None. Volunteer please. :)";
     }
 
     public Job(UUID id) {
         mId = id;
+        mPoster = "None (TODO attach to User)";
         mCompensation = "";
         mDate = new Date();
+        mVolunteer = "None. Volunteer please. :)";
     }
 }
