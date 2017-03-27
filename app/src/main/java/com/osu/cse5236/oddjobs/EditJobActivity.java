@@ -20,7 +20,6 @@ import java.util.UUID;
 public class EditJobActivity extends AppCompatActivity {
 
     private static final String TAG = "EditJobActivity RAWR";
-    private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private Job mJob;
     private EditText mTitleField;
@@ -42,10 +41,6 @@ public class EditJobActivity extends AppCompatActivity {
         if (JobCollection.editJob != null) {
             mJob = JobCollection.get(this).getJob(JobCollection.editJob);
         }
-
-        System.out.println("RAWR in edit: " + mJob.getTitle());
-        System.out.println("RAWR in edit: " + mJob.getCompensation());
-        System.out.println("RAWR in edit: " + mJob.getDescription());
 
         mTitleField = (EditText) findViewById(R.id.job_title);
         if (mJob.getTitle() != null) {
@@ -69,12 +64,10 @@ public class EditJobActivity extends AppCompatActivity {
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 enteredDescription = s.toString();
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -102,8 +95,7 @@ public class EditJobActivity extends AppCompatActivity {
                 mJob.setTitle(enteredTitle);
                 mJob.setCompensation(enteredCompensation);
                 mJob.setDescription(enteredDescription);
-
-                JobCollection.get(mContext).updateJob(mJob); // TODO: edit, not add
+                JobCollection.get(mContext).updateJob(mJob);
                 finish();
             }
         });
@@ -122,7 +114,6 @@ public class EditJobActivity extends AppCompatActivity {
     public static Intent newIntent(Context packageContext, UUID jobId) {
         Log.d(TAG, "newIntent() called");
         Intent intent = new Intent(packageContext, EditJobActivity.class);
-//        intent.putExtra(EXTRA_JOB_ID, jobId);
         return intent;
     }
 }
