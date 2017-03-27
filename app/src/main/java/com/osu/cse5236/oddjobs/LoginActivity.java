@@ -30,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,9 +100,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 attemptLogin();
             }
         });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        Button mregisterButton = (Button) findViewById(R.id.register_button);
+        mregisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Register button clicked in LoginActivity");
+                Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void populateAutoComplete() {
@@ -341,37 +352,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (InterruptedException e) {
                 return false;
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
+            // TODO: This is probably where the password will be checked.
+            UserCollection userCollection = UserCollection.get(LoginActivity.this);
+            List<User> users = userCollection.getUsers();
+            for (User user : users) {
+                if (user.getEmail().equals(mEmail)) {
                     // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    return user.getPassword().equals(mPassword);
                 }
             }
 
-            int x = 0;
-            User user = new User();
-            SQLiteDatabase oddJobsDB = openOrCreateDatabase("oddJobs",MODE_PRIVATE,null);
-            oddJobsDB.beginTransaction();
-            ContentValues values = new ContentValues();
-            if (isEmailValid(mEmail)) {
-                // TODO: add it to the Database as well
-                user.setEmail(mEmail);
-                values.put("email", user.getEmail());
-                x++;
-            }
-            if (isPasswordValid(mPassword)) {
-                // TODO: add it to the Database as well
-                user.setPassword(mPassword);
-                values.put("password", user.getPassword());
-                x++;
-            }
-            //oddJobsDB.insert("users", null, values);
-            oddJobsDB.endTransaction();
-            if (x == 2){
-                Log.d(TAG, "New User Created!");
-            }
             return true;
         }
 
