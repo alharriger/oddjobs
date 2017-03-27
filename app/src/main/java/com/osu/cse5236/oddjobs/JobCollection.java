@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.util.Log;
 
 import com.osu.cse5236.oddjobs.database.JobBaseHelper;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.osu.cse5236.oddjobs.database.JobDbSchema.*;
+import static com.osu.cse5236.oddjobs.database.JobDbSchema.JobTable;
 
 /*
  * Job Collection Singleton
@@ -125,13 +124,5 @@ public class JobCollection {
     }
 
 
-    MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
-        @Override
-        public void gotLocation(Location location) {
-            //
-        }
-    };
 
-    MyLocation myLocation = new MyLocation();
-    myLocation.getLocation(this, locationResult);
 }
