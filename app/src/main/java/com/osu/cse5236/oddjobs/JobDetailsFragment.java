@@ -94,6 +94,10 @@ public class JobDetailsFragment extends Fragment {
                 Log.d(TAG, "Edit button clicked");
                 // This needs to somehow give EditJobActivity the mJob
                 Intent intent = EditJobActivity.newIntent(getActivity(), mJob.getId());
+                System.out.println("RAWR in details: " + mJob.getTitle());
+                System.out.println("RAWR in details: " + mJob.getCompensation());
+                System.out.println("RAWR in details: " + mJob.getDescription());
+                JobCollection.editJob = mJob.getId();
                 intent.putExtra(EXTRA_JOB_ID, mJob.getId());
                 startActivity(intent);
             }

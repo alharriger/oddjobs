@@ -22,6 +22,7 @@ public class JobCollection {
     private static final String TAG = "JobCollection RAWR";
 
     private static JobCollection sJobCollection;
+    public static UUID editJob;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;

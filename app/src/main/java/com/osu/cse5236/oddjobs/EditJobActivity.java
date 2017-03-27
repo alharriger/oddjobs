@@ -37,10 +37,15 @@ public class EditJobActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_new_job);
+        setContentView(R.layout.activity_edit_job);
 
-//        Bundle bundle = this.getIntent().getExtras();
-//        mJob = JobCollection.get(this).getJob((UUID) bundle.get(EXTRA_JOB_ID));
+        if (JobCollection.editJob != null) {
+            mJob = JobCollection.get(this).getJob(JobCollection.editJob);
+        }
+
+        System.out.println("RAWR in edit: " + mJob.getTitle());
+        System.out.println("RAWR in edit: " + mJob.getCompensation());
+        System.out.println("RAWR in edit: " + mJob.getDescription());
 
         mTitleField = (EditText) findViewById(R.id.job_title);
         if (mJob.getTitle() != null) {
@@ -115,7 +120,7 @@ public class EditJobActivity extends AppCompatActivity {
 
     public static Intent newIntent(Context packageContext, UUID jobId) {
         Log.d(TAG, "newIntent() called");
-        Intent intent = new Intent(packageContext, NewJobActivity.class);
+        Intent intent = new Intent(packageContext, EditJobActivity.class);
 //        intent.putExtra(EXTRA_JOB_ID, jobId);
         return intent;
     }
