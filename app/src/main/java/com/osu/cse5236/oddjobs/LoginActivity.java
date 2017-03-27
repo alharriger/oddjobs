@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -67,6 +68,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private UUID userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -358,6 +361,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             System.out.println(TAG + " " + users.toString());
             for (User user : users) {
                 if (user.getEmail().equals(mEmail)) {
+                    userId = user.getId();
+                    UserCollection.get(getApplicationContext()).setCurrentUserId(userId);
                     // Account exists, return true if the password matches.
                     if (user.getPassword() != null ) {
                         return user.getPassword().equals(mPassword);
