@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 
 public class JobCursorWrapper extends CursorWrapper {
-    private static final String TAG = "JobCursorWrapper";
+    private static final String TAG = "JobCursorWrapper RAWR";
 
     public JobCursorWrapper(Cursor cursor) {
         super(cursor);

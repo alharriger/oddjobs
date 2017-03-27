@@ -8,7 +8,7 @@ import android.util.Log;
 import com.osu.cse5236.oddjobs.database.JobDbSchema.JobTable;
 
 public class JobBaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = "JobBaseHelper";
+    private static final String TAG = "JobBaseHelper RAWR";
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "jobBase.db";
 
