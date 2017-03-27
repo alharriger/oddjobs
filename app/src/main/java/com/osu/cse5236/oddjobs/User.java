@@ -2,6 +2,8 @@ package com.osu.cse5236.oddjobs;
 
 import android.provider.ContactsContract;
 
+import com.osu.cse5236.oddjobs.Job;
+
 import java.util.List;
 import java.util.UUID;
 

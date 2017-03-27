@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
