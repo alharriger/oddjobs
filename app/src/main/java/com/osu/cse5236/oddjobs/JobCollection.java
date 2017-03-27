@@ -22,7 +22,7 @@ public class JobCollection {
     private static final String TAG = "JobCollection RAWR";
 
     private static JobCollection sJobCollection;
-    public static UUID editJob;
+    public static UUID editJob; // not ideal; used to hold job edited in EditJobActivity
 
     private Context mContext;
     private SQLiteDatabase mDatabase;

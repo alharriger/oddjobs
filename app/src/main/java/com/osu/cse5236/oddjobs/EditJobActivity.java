@@ -103,9 +103,6 @@ public class EditJobActivity extends AppCompatActivity {
                 mJob.setCompensation(enteredCompensation);
                 mJob.setDescription(enteredDescription);
 
-                System.out.println("RAWR in edit: " + mJob.getTitle());
-                System.out.println("RAWR in edit: " + mJob.getCompensation());
-                System.out.println("RAWR in edit: " + mJob.getDescription());
                 JobCollection.get(mContext).updateJob(mJob); // TODO: edit, not add
                 finish();
             }
