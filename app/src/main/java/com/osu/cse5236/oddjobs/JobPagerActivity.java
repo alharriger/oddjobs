@@ -48,7 +48,7 @@ public class JobPagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 Job job = mJobs.get(position);
-                return JobFragment.newInstance(job.getId());
+                return JobDetailsFragment.newInstance(job.getId());
             }
 
             @Override
