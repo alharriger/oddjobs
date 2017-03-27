@@ -11,10 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/job_title_label" />
-    <TextView
+    <EditText
         android:id="@+id/job_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:hint="@string/job_title_hint"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -22,11 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/job_description_label"/>
-    <TextView
+    <EditText
         android:id="@+id/job_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:lines="6"
         android:gravity="top"
+        android:hint="@string/job_description_hint"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -34,37 +38,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/job_compensation_label"/>
-    <TextView
+    <EditText
         android:id="@+id/job_compensation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:inputType="numberDecimal"
+        android:hint="@string/job_compensation_hint"
         android:layout_marginBottom="16dp"/>
 
     <Button
-        android:id="@+id/volunteer_button"
+        android:id="@+id/update_job_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/job_volunteer_button" />
+        android:text="@string/update_job_button" />
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/delete_job_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/job_completed"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:text="@string/job_completed_label" />
-
-        <Button
-            android:id="@+id/edit_job_button"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/edit_job_button" />
-
-
-
-    </RelativeLayout>
+        android:text="@string/delete_job_button" />
 
 </LinearLayout>

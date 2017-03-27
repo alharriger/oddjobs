@@ -1,5 +1,6 @@
 package com.osu.cse5236.oddjobs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class JobFragment extends Fragment {
     private TextView mDescriptionView;
     private Button mVolunteerButton;
     private CheckBox mCompletedCheckbox;
+    private Button mEditButton;
 
     public static JobFragment newInstance(UUID jobId) {
         Log.d(TAG, "newInstance() called");
@@ -77,6 +79,16 @@ public class JobFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setCompleted(isChecked);
+            }
+        });
+
+        mEditButton = (Button) v.findViewById(R.id.edit_job_button);
+        mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Edit button clicked");
+                Intent intent = EditJobActivity.newIntent(getActivity(), mJob.getId());
+                startActivity(intent);
             }
         });
 

@@ -31,6 +31,7 @@
             android:name=".NewJobActivity"
             android:parentActivityName=".JobListActivity">
         </activity>
+        <activity android:name=".EditJobActivity"></activity>
     </application>
 
 </manifest>

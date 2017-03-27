@@ -45,6 +45,12 @@ public class JobCollection {
         mDatabase.insert(JobTable.NAME, null, values);
     }
 
+//    public void deleteJob(Job j) {
+//        Log.d(TAG, "deleteJob() called");
+//        ContentValues values = getContentValues(j);
+//        mDatabase.delete(JobTable.NAME, null, null);
+//    }
+
     public List<Job> getJobs() {
         Log.d(TAG, "getJobs() called");
         List<Job> jobs = new ArrayList<>();
