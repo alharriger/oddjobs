@@ -102,7 +102,7 @@ public class NewUserActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-        mPasswordField = (EditText) findViewById(R.id.password);
+        mPasswordField = (EditText) findViewById(R.id.Password);
         mPasswordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -114,7 +114,7 @@ public class NewUserActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        mConfirmPasswordField = (EditText) findViewById(R.id.password);
+        mConfirmPasswordField = (EditText) findViewById(R.id.confirm_password);
         mConfirmPasswordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
