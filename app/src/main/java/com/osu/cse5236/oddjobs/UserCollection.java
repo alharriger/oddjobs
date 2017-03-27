@@ -27,6 +27,11 @@ public class UserCollection {
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
+    private static UUID mUserId;
+
+    public void setCurrentUserId(UUID userId) {
+        this.mUserId = userId;
+    }
 
     public static UserCollection get(Context context) {
         Log.d(TAG, "get() called");

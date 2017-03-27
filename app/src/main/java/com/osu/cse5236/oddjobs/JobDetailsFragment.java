@@ -31,8 +31,9 @@ public class JobDetailsFragment extends Fragment {
     private TextView mDescriptionView;
     private Button mVolunteerButton;
     private TextView mVolunteerView;
-    private CheckBox mCompletedCheckbox;
     private Button mEditButton;
+    private Button mPayButton;
+    private CheckBox mCompletedCheckbox;
 
     public static JobDetailsFragment newInstance(UUID jobId) {
         Log.d(TAG, "newInstance() called");
@@ -107,6 +108,16 @@ public class JobDetailsFragment extends Fragment {
                 Intent intent = EditJobActivity.newIntent(getActivity(), mJob.getId());
                 JobCollection.editJob = mJob.getId();
                 intent.putExtra(EXTRA_JOB_ID, mJob.getId());
+                startActivity(intent);
+            }
+        });
+
+        mPayButton = (Button) v.findViewById(R.id.pay_button);
+        mPayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Pay button clicked");
+                Intent intent = new Intent(getActivity(), PayActivity.class);
                 startActivity(intent);
             }
         });

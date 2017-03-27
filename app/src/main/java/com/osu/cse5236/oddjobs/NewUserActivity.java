@@ -1,7 +1,6 @@
 package com.osu.cse5236.oddjobs;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -11,9 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.UUID;
 import java.util.List;
-
+import java.util.UUID;
 
 
 /**
@@ -47,7 +45,6 @@ public class NewUserActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_new_user);
 
-        //mJob = new Job();
         mUser = new User();
         mFirstNameField = (EditText) findViewById(R.id.first_name);
         mFirstNameField.addTextChangedListener(new TextWatcher() {
@@ -82,7 +79,6 @@ public class NewUserActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 enteredPhone = s.toString();
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -127,26 +123,40 @@ public class NewUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "Create New User button clicked");
                 mUser.setFirstName(enteredFirstName);
+                Log.d(TAG, "User first name set to: " + enteredFirstName);
                 mUser.setLastName(enteredLastName);
+                Log.d(TAG, "User last name set to: " + enteredLastName);
                 mUser.setPhone(enteredPhone);
+                Log.d(TAG, "User phone set to: " + enteredPhone);
                 mUser.setEmail(enteredEmail);
-                if (enteredPassword.equals(enteredConfirmPassword)) {
-                    mUser.setPassword(enteredPassword);
+                Log.d(TAG, "User email set to: " + enteredEmail);
+                if (enteredPassword != null) {
+                    if (enteredPassword.equals(enteredConfirmPassword)) {
+                        mUser.setPassword(enteredPassword);
+                        Log.d(TAG, "Passwords matched.");
+                    } else {
+                        Log.d(TAG, "Passwords did not match.");
+                    }
                 }
-                else {
-                    Log.d(TAG, "Passwords not Matching");
-                }
+                Log.d(TAG, "User password set to: " + enteredPassword);
+
+                // Test code
                 UserCollection.get(mContext).addUser(mUser);
+                UUID id = mUser.getId();
+
+                User testUser = UserCollection.get(mContext).getUser(id);
+                if (testUser.getPassword() != null) {
+                    Log.d(TAG, "testUser's password is " + testUser.getPassword());
+                } else {
+                    Log.d(TAG, "testUser's password is null");
+                }
+
+                List<User> users = UserCollection.get(mContext).getUsers();
+                Log.d(TAG, "Users are: " + users.toString());
+
                 finish();
             }
         });
 
-    }
-
-    public static Intent newIntent(Context packageContext, UUID userId) {
-        Log.d(TAG, "newIntent() called");
-        Intent intent = new Intent(packageContext, NewUserActivity.class);
-        intent.putExtra(EXTRA_USER_ID, userId);
-        return intent;
     }
 }

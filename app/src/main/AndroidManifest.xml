@@ -3,6 +3,8 @@
     package="com.osu.cse5236.oddjobs">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -37,6 +39,10 @@
         </activity>
         <activity
             android:name=".EditJobActivity"
+            android:parentActivityName=".JobListActivity">
+        </activity>
+        <activity
+            android:name=".PayActivity"
             android:parentActivityName=".JobListActivity">
         </activity>
     </application>

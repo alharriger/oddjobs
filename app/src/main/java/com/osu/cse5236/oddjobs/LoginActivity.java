@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -30,10 +29,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -46,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private static final String TAG = "LoginActivity RAWR";
     private SQLiteDatabase mDatabase;
+
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -68,6 +68,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private UUID userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mregisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "Register button clicked in LoginActivity");
+                Log.d(TAG, "Register button clicked");
                 Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
                 startActivity(intent);
             }
@@ -355,10 +357,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: This is probably where the password will be checked.
             UserCollection userCollection = UserCollection.get(LoginActivity.this);
             List<User> users = userCollection.getUsers();
+            System.out.println(TAG + " Users are:");
+            System.out.println(TAG + " " + users.toString());
             for (User user : users) {
                 if (user.getEmail().equals(mEmail)) {
+                    userId = user.getId();
+                    UserCollection.get(getApplicationContext()).setCurrentUserId(userId);
                     // Account exists, return true if the password matches.
-                    return user.getPassword().equals(mPassword);
+                    if (user.getPassword() != null ) {
+                        return user.getPassword().equals(mPassword);
+                    } else {
+                        System.out.println(TAG + " Password is null!");
+                    }
                 }
             }
 
@@ -401,6 +411,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume() called");
+
+        // test code
+        List<User> users = UserCollection.get(this).getUsers();
+        for (User user : users) {
+            if (user.getId() != null) {Log.d(TAG, "id: " + user.getId());}
+            if (user.getFirstName() != null) {Log.d(TAG, "first name: " + user.getFirstName());}
+            if (user.getLastName() != null) {Log.d(TAG, "last name: " + user.getLastName());}
+            if (user.getPhone() != null) {Log.d(TAG, "phone: " + user.getPassword());}
+            if (user.getEmail() != null) {Log.d(TAG, "email: " + user.getEmail());}
+            if (user.getPassword() != null) {Log.d(TAG, "password: " + user.getPassword());}
+            Log.d(TAG, " *********************** ");
+        }
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.osu.cse5236.oddjobs.database.JobDbSchema.*;
+import static com.osu.cse5236.oddjobs.database.JobDbSchema.JobTable;
 
 /*
  * Job Collection Singleton
@@ -123,4 +123,7 @@ public class JobCollection {
 
         return values;
     }
+
+
+
 }
