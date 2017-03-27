@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,12 +19,14 @@ import java.util.UUID;
 
 public class JobPagerActivity extends AppCompatActivity {
 
-    private static final String EXTRA_JOB_ID = "com.osu.oddjobs2.job_id";
+    private static final String TAG = "JobPagerActivity";
+    private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private ViewPager mViewPager;
     private List<Job> mJobs;
 
     public static Intent newIntent(Context packageContext, UUID jobId) {
+        Log.d(TAG, "newIntent() called");
         Intent intent = new Intent(packageContext, JobPagerActivity.class);
         intent.putExtra(EXTRA_JOB_ID, jobId);
         return intent;
@@ -31,6 +34,7 @@ public class JobPagerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_pager);
 

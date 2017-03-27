@@ -6,7 +6,7 @@ import java.util.UUID;
 public class Job {
     private UUID mId;
     private String mTitle;
-    private Float mCompensation;
+    private String mCompensation = "";
     private String mDescription;
     private Date mDate;
     private boolean mCompleted;
@@ -27,11 +27,11 @@ public class Job {
         this.mTitle = title;
     }
 
-    public Float getCompensation() {
+    public String getCompensation() {
         return mCompensation;
     }
 
-    public void setCompensation(Float compensation) {
+    public void setCompensation(String compensation) {
         this.mCompensation = compensation;
     }
 
@@ -61,10 +61,12 @@ public class Job {
 
     public Job() {
         mId = UUID.randomUUID();
+        mCompensation = "";
     }
 
     public Job(UUID id) {
         mId = id;
+        mCompensation = "";
         mDate = new Date();
     }
 }

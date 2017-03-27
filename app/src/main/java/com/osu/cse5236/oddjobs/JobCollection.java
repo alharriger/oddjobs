@@ -108,8 +108,8 @@ public class JobCollection {
         ContentValues values = new ContentValues();
         values.put(JobTable.Cols.UUID, job.getId().toString());
         values.put(JobTable.Cols.TITLE, job.getTitle());
-//        values.put(JobTable.Cols.COMPENSATION, job.getCompensation().toString());
-//        values.put(JobTable.Cols.DESCRIPTION, job.getDescription());
+        values.put(JobTable.Cols.COMPENSATION, job.getCompensation());
+        values.put(JobTable.Cols.DESCRIPTION, job.getDescription());
 //        values.put(JobTable.Cols.DATE, job.getDate().getTime());
         values.put(JobTable.Cols.COMPLETED, job.isCompleted() ? 1 : 0);
 
