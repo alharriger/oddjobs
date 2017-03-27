@@ -26,9 +26,7 @@ public class UserBaseHelper extends SQLiteOpenHelper {
                 UserDbSchema.UserTable.Cols.LASTNAME + ", " +
                 UserDbSchema.UserTable.Cols.EMAIL + ", " +
                 UserDbSchema.UserTable.Cols.PHONE + ", " +
-                UserDbSchema.UserTable.Cols.PASSWORD + ", " +
-                UserDbSchema.UserTable.Cols.POSTED + ", " +
-                UserDbSchema.UserTable.Cols.VOLUNTEEREDFOR);
+                UserDbSchema.UserTable.Cols.PASSWORD + ")");
     }
 
     @Override

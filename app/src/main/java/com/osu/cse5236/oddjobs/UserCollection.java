@@ -120,8 +120,6 @@ public class UserCollection {
         values.put(UserTable.Cols.PHONE, user.getPhone());
         values.put(UserTable.Cols.EMAIL, user.getEmail());
         values.put(UserTable.Cols.PASSWORD, user.getPassword());
-//        values.put(JobTable.Cols.DATE, job.getDate().getTime());
-        //values.put(UserTable.Cols.COMPLETED, user.isCompleted() ? 1 : 0);
 
         return values;
     }

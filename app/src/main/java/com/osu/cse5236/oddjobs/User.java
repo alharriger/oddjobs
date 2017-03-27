@@ -18,8 +18,7 @@ public class User {
     private String mEmail;
     private String mPhone;
     private String mPassword;
-    private List<Job> mPosted;
-    private List<Job> mVolunteeredFor;
+
 
     public String getFirstName() {
         return mFirstName;
@@ -59,22 +58,6 @@ public class User {
     public String getPassword() { return mPassword; }
 
     public void setPassword(String password) { mPassword = password; }
-
-    public List<Job> getPosted() {
-        return mPosted;
-    }
-
-    public void setPosted(List<Job> posted) {
-        mPosted = posted;
-    }
-
-    public List<Job> getVolunteeredFor() {
-        return mVolunteeredFor;
-    }
-
-    public void setVolunteeredFor(List<Job> volunteeredFor) {
-        mVolunteeredFor = volunteeredFor;
-    }
 
     public UUID getId() {
         return mId;
