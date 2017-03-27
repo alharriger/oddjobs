@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.UUID;
+import java.util.List;
+
+
 
 /**
  * Created by pavlecoric on 3/27/17.
@@ -21,20 +24,13 @@ public class NewUserActivity extends AppCompatActivity {
     private static final String TAG = "NewUserActivity RAWR";
     private static final String EXTRA_USER_ID = "com.osu.oddjobs.user_id";
 
-    //private Job mJob;
     private User mUser;
-    //private EditText mTitleField;
-    //private EditText mCompensationField;
-    //private EditText mDescriptionField;
     private EditText mFirstNameField;
     private EditText mLastNameField;
     private EditText mPhoneField;
     private EditText mEmailField;
     private EditText mPasswordField;
     private EditText mConfirmPasswordField;
-    //private String enteredTitle;
-    //private String enteredCompensation;
-    //private String enteredDescription;
     private String enteredFirstName;
     private String enteredLastName;
     private String enteredPhone;
@@ -45,6 +41,7 @@ public class NewUserActivity extends AppCompatActivity {
     private Context mContext = this;
 
     public void onCreate(Bundle savedInstanceState) {
+
         Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
 
@@ -52,7 +49,6 @@ public class NewUserActivity extends AppCompatActivity {
 
         //mJob = new Job();
         mUser = new User();
-
         mFirstNameField = (EditText) findViewById(R.id.first_name);
         mFirstNameField.addTextChangedListener(new TextWatcher() {
             @Override
