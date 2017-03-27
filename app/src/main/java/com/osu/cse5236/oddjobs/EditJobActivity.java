@@ -116,7 +116,7 @@ public class EditJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Delete Job button clicked");
-//                JobCollection.get(mContext).deleteJob(mJob);
+                JobCollection.get(mContext).deleteJob(mJob);
                 finish();
             }
         });

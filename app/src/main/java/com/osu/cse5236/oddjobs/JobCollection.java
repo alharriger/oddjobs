@@ -46,11 +46,11 @@ public class JobCollection {
         mDatabase.insert(JobTable.NAME, null, values);
     }
 
-//    public void deleteJob(Job j) {
-//        Log.d(TAG, "deleteJob() called");
-//        ContentValues values = getContentValues(j);
-//        mDatabase.delete(JobTable.NAME, null, null);
-//    }
+    public void deleteJob(Job j) {
+        Log.d(TAG, "deleteJob() called");
+        ContentValues values = getContentValues(j);
+        mDatabase.delete(JobTable.NAME, "uuid=?", new String[] {String.valueOf(j.getId())});
+    }
 
     public List<Job> getJobs() {
         Log.d(TAG, "getJobs() called");
