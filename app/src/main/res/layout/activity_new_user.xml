@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/first_name"
-        android:text="James" />
+        android:ems="10" />
 
     <TextView
         android:text="Last Name:"
@@ -29,8 +27,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/last_name"
-        android:text="Gosling" />
+        android:id="@+id/last_name" />
 
     <TextView
         android:text="Phone Number:"
@@ -43,8 +40,7 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/phone"
-        android:text="1-800-633-5672" />
+        android:id="@+id/phone" />
 
     <TextView
         android:text="Email:"
@@ -57,8 +53,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/email"
-        android:text="inventor@java.com" />
+        android:id="@+id/email" />
 
     <TextView
         android:text="Enter Password:"
@@ -71,8 +66,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/Password"
-        android:text="samplepassword" />
+        android:id="@+id/Password" />
 
     <TextView
         android:text="Confirm Password:"
@@ -85,8 +79,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/confirm_password"
-        android:text="confirmationpa" />
+        android:id="@+id/confirm_password" />
 
     <Button
         android:text="Register User"
