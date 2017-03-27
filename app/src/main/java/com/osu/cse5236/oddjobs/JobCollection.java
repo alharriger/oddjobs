@@ -19,7 +19,7 @@ import static com.osu.cse5236.oddjobs.database.JobDbSchema.*;
  * Job Collection Singleton
  */
 public class JobCollection {
-    private static final String TAG = "JobCollection";
+    private static final String TAG = "JobCollection RAWR";
 
     private static JobCollection sJobCollection;
 

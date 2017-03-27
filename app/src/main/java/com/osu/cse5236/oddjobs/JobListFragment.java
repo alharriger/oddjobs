@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 public class JobListFragment extends Fragment{
-    private static final String TAG = "JobListFragment";
+    private static final String TAG = "JobListFragment RAWR";
 
     private RecyclerView mJobRecyclerView;
     private JobAdapter mAdapter;

@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class JobPagerActivity extends AppCompatActivity {
 
-    private static final String TAG = "JobPagerActivity";
+    private static final String TAG = "JobPagerActivity RAWR";
     private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private ViewPager mViewPager;

@@ -43,7 +43,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity RAWR";
     private SQLiteDatabase mDatabase;
     /**
      * Id to identity READ_CONTACTS permission request.

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class JobFragment extends Fragment {
 
     private static final String ARG_JOB_ID = "job_id";
-    private static final String TAG = "JobFragment";
+    private static final String TAG = "JobFragment RAWR";
 
     private Job mJob;
     private TextView mTitleView;

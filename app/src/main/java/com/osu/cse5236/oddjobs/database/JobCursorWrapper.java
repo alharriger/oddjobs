@@ -32,6 +32,8 @@ public class JobCursorWrapper extends CursorWrapper {
 
         Job job = new Job(UUID.fromString(uuidString));
         job.setTitle(title);
+        job.setCompensation(compensation);
+        job.setDescription(description);
         job.setDate(new Date(date));
         job.setCompleted(isCompleted != 0);
 

@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 
 public class NewJobActivity extends AppCompatActivity {
-    private static final String TAG = "NewJobActivity";
+    private static final String TAG = "NewJobActivity RAWR";
     private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private Job mJob;
