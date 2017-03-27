@@ -16,7 +16,7 @@ public class User {
     private String mFirstName;
     private String mLastName;
     private String mEmail;
-    private ContactsContract.CommonDataKinds.Phone mPhone;
+    private String mPhone;
     private String mPassword;
     private List<Job> mPosted;
     private List<Job> mVolunteeredFor;
@@ -45,13 +45,16 @@ public class User {
         mEmail = email;
     }
 
-    public  ContactsContract.CommonDataKinds.Phone getPhone() {
+    /*public  ContactsContract.CommonDataKinds.Phone getPhone() {
         return mPhone;
-    }
+    }*/
 
-    public void setPhone( ContactsContract.CommonDataKinds.Phone phone) {
+    /*public void setPhone( ContactsContract.CommonDataKinds.Phone phone) {
         mPhone = phone;
-    }
+    }*/
+    public String getPhone() { return mPhone; }
+
+    public void setPhone(String phone) { mPhone = phone; }
 
     public String getPassword() { return mPassword; }
 
