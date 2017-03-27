@@ -99,9 +99,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 attemptLogin();
             }
         });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        Button mregisterButton = (Button) findViewById(R.id.register_button);
+        mregisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Register button clicked in LoginActivity");
+                Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void populateAutoComplete() {
@@ -351,18 +361,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             int x = 0;
+            // TODO: ensure that this works
             User user = new User();
             SQLiteDatabase oddJobsDB = openOrCreateDatabase("oddJobs",MODE_PRIVATE,null);
             oddJobsDB.beginTransaction();
             ContentValues values = new ContentValues();
             if (isEmailValid(mEmail)) {
-                // TODO: add it to the Database as well
                 user.setEmail(mEmail);
                 values.put("email", user.getEmail());
                 x++;
             }
             if (isPasswordValid(mPassword)) {
-                // TODO: add it to the Database as well
                 user.setPassword(mPassword);
                 values.put("password", user.getPassword());
                 x++;

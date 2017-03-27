@@ -66,5 +66,17 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
+        <TextView
+            android:text="Not a user? Register Below!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" />
+
+        <Button
+            android:text="Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_button" />
+
     </LinearLayout>
 </LinearLayout>
