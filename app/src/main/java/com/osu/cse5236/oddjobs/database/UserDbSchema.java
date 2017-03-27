@@ -1,6 +1,4 @@
-package com.osu.cse5236.oddjobs;
-import java.util.List;
-import java.util.UUID;
+package com.osu.cse5236.oddjobs.database;
 /**
  * Created by pavlecoric on 3/23/17.
  */

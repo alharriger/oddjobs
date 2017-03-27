@@ -3,22 +3,22 @@ package com.osu.cse5236.oddjobs;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -31,25 +31,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.content.ContentValues;
-
 import java.util.ArrayList;
 import java.util.List;
 
-// java email
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.*;
-
 import static android.Manifest.permission.READ_CONTACTS;
+
+// java email
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity RAWR";
     private SQLiteDatabase mDatabase;
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -99,10 +93,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "SignIn button clicked)");
-                Intent intent = new Intent(LoginActivity.this, ListingsActivity.class);
+                Log.d(TAG, "SignIn button clicked");
+                Intent intent = new Intent(LoginActivity.this, JobListActivity.class);
                 startActivity(intent);
-                // TODO: Uncomment next line and make it still work
                 attemptLogin();
             }
         });
@@ -373,7 +366,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 values.put("password", user.getPassword());
                 x++;
             }
-            oddJobsDB.insert("users", null, values);
+            //oddJobsDB.insert("users", null, values);
             oddJobsDB.endTransaction();
             if (x == 2){
                 Log.d(TAG, "New User Created!");

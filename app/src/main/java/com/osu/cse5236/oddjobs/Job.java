@@ -1,18 +1,23 @@
 package com.osu.cse5236.oddjobs;
 
-import java.util.Currency;
 import java.util.Date;
 import java.util.UUID;
 
 public class Job {
     private UUID mId;
     private String mTitle;
+    private String mCompensation = "";
     private String mDescription;
     private Date mDate;
-    private boolean mPaidHourly;
-    private Currency mCompensation;
-    private User mPoster;
-    private User mVolunteer;
+    private boolean mCompleted;
+
+    public UUID getId() {
+        return mId;
+    }
+
+    public void setId(UUID id) {
+        this.mId = id;
+    }
 
     public String getTitle() {
         return mTitle;
@@ -20,6 +25,14 @@ public class Job {
 
     public void setTitle(String title) {
         this.mTitle = title;
+    }
+
+    public String getCompensation() {
+        return mCompensation;
+    }
+
+    public void setCompensation(String compensation) {
+        this.mCompensation = compensation;
     }
 
     public String getDescription() {
@@ -38,44 +51,22 @@ public class Job {
         this.mDate = date;
     }
 
-    public boolean isPaidHourly() {
-        return mPaidHourly;
+    public boolean isCompleted() {
+        return mCompleted;
     }
 
-    public void setPaidHourly(boolean paidHourly) {
-        this.mPaidHourly = paidHourly;
-    }
-
-    public Currency getCompensation() {
-        return mCompensation;
-    }
-
-    public void setCompensation(Currency compensation) {
-        this.mCompensation = compensation;
-    }
-
-    public User getVolunteer() {
-        return mVolunteer;
-    }
-
-    public void setVolunteer(User volunteer) {
-        this.mVolunteer = volunteer;
-    }
-
-    public User getPoster() {
-        return mPoster;
-    }
-
-    public void setPoster(User poster) {
-        this.mPoster = poster;
-    }
-
-    public UUID getId() {
-        return mId;
+    public void setCompleted(boolean completed) {
+        this.mCompleted = completed;
     }
 
     public Job() {
         mId = UUID.randomUUID();
+        mCompensation = "";
+    }
+
+    public Job(UUID id) {
+        mId = id;
+        mCompensation = "";
         mDate = new Date();
     }
 }
