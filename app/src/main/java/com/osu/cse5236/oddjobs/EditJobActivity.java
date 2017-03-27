@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class EditJobActivity extends AppCompatActivity {
 
-    private static final String TAG = "EditJobActivity";
+    private static final String TAG = "EditJobActivity RAWR";
     private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private Job mJob;
@@ -99,10 +99,14 @@ public class EditJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Edit Job button clicked");
-//                mJob.setTitle(enteredTitle);
-//                mJob.setCompensation(enteredCompensation);
-//                mJob.setDescription(enteredDescription);
-//                JobCollection.get(mContext).addJob(mJob); // TODO: edit, not add
+                mJob.setTitle(enteredTitle);
+                mJob.setCompensation(enteredCompensation);
+                mJob.setDescription(enteredDescription);
+
+                System.out.println("RAWR in edit: " + mJob.getTitle());
+                System.out.println("RAWR in edit: " + mJob.getCompensation());
+                System.out.println("RAWR in edit: " + mJob.getDescription());
+                JobCollection.get(mContext).updateJob(mJob); // TODO: edit, not add
                 finish();
             }
         });
