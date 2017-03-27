@@ -358,18 +358,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             int x = 0;
+            // TODO: ensure that this works
             User user = new User();
             SQLiteDatabase oddJobsDB = openOrCreateDatabase("oddJobs",MODE_PRIVATE,null);
             oddJobsDB.beginTransaction();
             ContentValues values = new ContentValues();
             if (isEmailValid(mEmail)) {
-                // TODO: add it to the Database as well
                 user.setEmail(mEmail);
                 values.put("email", user.getEmail());
                 x++;
             }
             if (isPasswordValid(mPassword)) {
-                // TODO: add it to the Database as well
                 user.setPassword(mPassword);
                 values.put("password", user.getPassword());
                 x++;
