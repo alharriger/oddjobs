@@ -22,10 +22,12 @@ public class JobBaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + JobTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 JobTable.Cols.UUID + "," +
+                JobTable.Cols.POSTER + "," +
                 JobTable.Cols.TITLE + "," +
                 JobTable.Cols.COMPENSATION + "," +
                 JobTable.Cols.DESCRIPTION + "," +
                 JobTable.Cols.COMPLETED + "," +
+                JobTable.Cols.VOLUNTEER + "," +
                 JobTable.Cols.DATE + ")"
         );
     }

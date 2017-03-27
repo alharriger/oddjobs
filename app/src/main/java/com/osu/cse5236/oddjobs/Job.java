@@ -5,11 +5,13 @@ import java.util.UUID;
 
 public class Job {
     private UUID mId;
+    private String mPoster;
     private String mTitle;
     private String mCompensation = "";
     private String mDescription;
     private Date mDate;
     private boolean mCompleted;
+    private String mVolunteer;
 
     public UUID getId() {
         return mId;
@@ -25,6 +27,14 @@ public class Job {
 
     public void setTitle(String title) {
         this.mTitle = title;
+    }
+
+    public String getPoster() {
+        return mPoster;
+    }
+
+    public void setPoster(String poster) {
+        this.mPoster = poster;
     }
 
     public String getCompensation() {
@@ -57,6 +67,14 @@ public class Job {
 
     public void setCompleted(boolean completed) {
         this.mCompleted = completed;
+    }
+
+    public String getVolunteer() {
+        return mVolunteer;
+    }
+
+    public void setVolunteer(String volunteer) {
+        this.mVolunteer = volunteer;
     }
 
     public Job() {

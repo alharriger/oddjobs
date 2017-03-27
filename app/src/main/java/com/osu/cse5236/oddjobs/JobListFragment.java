@@ -85,6 +85,8 @@ public class JobListFragment extends Fragment{
             mJobRecyclerView.setAdapter(mAdapter);
         } else {
             Log.d(TAG, "in updateUI(), mAdapter != null");
+            mAdapter.mJobs.clear();
+            mAdapter.mJobs.addAll(jobs);
             mAdapter.notifyDataSetChanged();
         }
     }

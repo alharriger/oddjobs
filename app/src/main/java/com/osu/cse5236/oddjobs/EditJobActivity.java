@@ -19,8 +19,7 @@ import java.util.UUID;
 
 public class EditJobActivity extends AppCompatActivity {
 
-    private static final String TAG = "EditJobActivity";
-    private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
+    private static final String TAG = "EditJobActivity RAWR";
 
     private Job mJob;
     private EditText mTitleField;
@@ -37,10 +36,11 @@ public class EditJobActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_new_job);
+        setContentView(R.layout.activity_edit_job);
 
-//        Bundle bundle = this.getIntent().getExtras();
-//        mJob = JobCollection.get(this).getJob((UUID) bundle.get(EXTRA_JOB_ID));
+        if (JobCollection.editJob != null) {
+            mJob = JobCollection.get(this).getJob(JobCollection.editJob);
+        }
 
         mTitleField = (EditText) findViewById(R.id.job_title);
         if (mJob.getTitle() != null) {
@@ -64,12 +64,10 @@ public class EditJobActivity extends AppCompatActivity {
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 enteredDescription = s.toString();
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -94,10 +92,10 @@ public class EditJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Edit Job button clicked");
-//                mJob.setTitle(enteredTitle);
-//                mJob.setCompensation(enteredCompensation);
-//                mJob.setDescription(enteredDescription);
-//                JobCollection.get(mContext).addJob(mJob); // TODO: edit, not add
+                mJob.setTitle(enteredTitle);
+                mJob.setCompensation(enteredCompensation);
+                mJob.setDescription(enteredDescription);
+                JobCollection.get(mContext).updateJob(mJob);
                 finish();
             }
         });
@@ -107,7 +105,7 @@ public class EditJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Delete Job button clicked");
-//                JobCollection.get(mContext).deleteJob(mJob);
+                JobCollection.get(mContext).deleteJob(mJob);
                 finish();
             }
         });
@@ -115,8 +113,7 @@ public class EditJobActivity extends AppCompatActivity {
 
     public static Intent newIntent(Context packageContext, UUID jobId) {
         Log.d(TAG, "newIntent() called");
-        Intent intent = new Intent(packageContext, NewJobActivity.class);
-//        intent.putExtra(EXTRA_JOB_ID, jobId);
+        Intent intent = new Intent(packageContext, EditJobActivity.class);
         return intent;
     }
 }
