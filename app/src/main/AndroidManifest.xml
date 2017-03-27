@@ -27,6 +27,10 @@
             android:name=".JobPagerActivity"
             android:parentActivityName=".JobListActivity">
         </activity>
+        <activity
+            android:name=".NewJobActivity"
+            android:parentActivityName=".JobListActivity">
+        </activity>
     </application>
 
 </manifest>

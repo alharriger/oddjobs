@@ -67,7 +67,7 @@ public class JobListFragment extends Fragment{
             case R.id.new_job:
                 Job job = new Job();
                 JobCollection.get(getActivity()).addJob(job);
-                Intent intent = JobPagerActivity.newIntent(getActivity(), job.getId());
+                Intent intent = NewJobActivity.newIntent(getActivity(), job.getId());
                 startActivity(intent);
                 return true;
             default:
