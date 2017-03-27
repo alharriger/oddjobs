@@ -11,12 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/job_title_label" />
-    <EditText
+    <TextView
         android:id="@+id/job_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:hint="@string/job_title_hint"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -24,13 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/job_description_label"/>
-    <EditText
+    <TextView
         android:id="@+id/job_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="6"
         android:gravity="top"
-        android:hint="@string/job_description_hint"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -38,13 +34,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/job_compensation_label"/>
-    <EditText
+    <TextView
         android:id="@+id/job_compensation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:inputType="numberDecimal"
-        android:hint="@string/job_compensation_hint"
         android:layout_marginBottom="16dp"/>
 
     <Button

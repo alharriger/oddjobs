@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,7 +25,11 @@ public class NewJobActivity extends AppCompatActivity {
     private EditText mTitleField;
     private EditText mCompensationField;
     private EditText mDescriptionField;
-    private Button mVolunteerButton;
+    private String enteredTitle;
+    private String enteredCompensation;
+    private String enteredDescription;
+    private Button mCreateNewJobButton;
+    private Context mContext = this;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() called");
@@ -32,25 +37,15 @@ public class NewJobActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_new_job);
 
+        mJob = new Job();
+
         mTitleField = (EditText) findViewById(R.id.job_title);
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mJob.setTitle(s.toString());
-            }
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
-
-        mCompensationField = (EditText) findViewById(R.id.job_compensation);
-        mCompensationField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mJob.setCompensation(s.toString());
+                enteredTitle = s.toString();
             }
             @Override
             public void afterTextChanged(Editable s) {}
@@ -63,15 +58,37 @@ public class NewJobActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mJob.setDescription(s.toString());
+                enteredDescription = s.toString();
             }
 
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
-        mVolunteerButton = (Button) findViewById(R.id.create_new_job_button);
-        mVolunteerButton.setEnabled(true);
+        mCompensationField = (EditText) findViewById(R.id.job_compensation);
+        mCompensationField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                enteredCompensation = s.toString();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        mCreateNewJobButton = (Button) findViewById(R.id.create_new_job_button);
+        mCreateNewJobButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Create New Job button clicked");
+                mJob.setTitle(enteredTitle);
+                mJob.setCompensation(enteredCompensation);
+                mJob.setDescription(enteredDescription);
+                JobCollection.get(mContext).addJob(mJob);
+                finish();
+            }
+        });
 
     }
 

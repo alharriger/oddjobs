@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "SignIn button clicked)");
+                Log.d(TAG, "SignIn button clicked");
                 Intent intent = new Intent(LoginActivity.this, JobListActivity.class);
                 startActivity(intent);
                 attemptLogin();
