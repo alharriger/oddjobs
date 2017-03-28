@@ -124,6 +124,4 @@
             android:text="@string/job_completed_label" />
     </LinearLayout>
 
-
-
 </LinearLayout>
