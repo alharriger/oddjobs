@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -18,6 +18,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.osu.cse5236.oddjobs.JobListFragment;
+import com.osu.cse5236.oddjobs.UserCollection;
 
 import java.io.IOException;
 import java.util.List;

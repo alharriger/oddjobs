@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.osu.cse5236.oddjobs.activities.JobPagerActivity;
+import com.osu.cse5236.oddjobs.activities.NewJobActivity;
+import com.osu.cse5236.oddjobs.activities.UserProfileActivity;
+
 import java.util.List;
 
 /**

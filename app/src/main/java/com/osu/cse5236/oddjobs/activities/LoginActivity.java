@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,6 +29,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.osu.cse5236.oddjobs.R;
+import com.osu.cse5236.oddjobs.User;
+import com.osu.cse5236.oddjobs.UserCollection;
 
 import java.util.ArrayList;
 import java.util.List;

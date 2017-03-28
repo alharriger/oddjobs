@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.osu.cse5236.oddjobs.Job;
+import com.osu.cse5236.oddjobs.JobCollection;
+import com.osu.cse5236.oddjobs.R;
+import com.osu.cse5236.oddjobs.UserCollection;
+
+import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Zenith on 3/27/2017.
+ * Created by Zenith on 3/26/2017.
  */
 
-public class EditJobActivity extends AppCompatActivity {
-
-    private static final String TAG = "EditJobActivity RAWR";
+public class NewJobActivity extends AppCompatActivity {
+    private static final String TAG = "NewJobActivity RAWR";
+    private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private Job mJob;
     private EditText mTitleField;
@@ -28,24 +34,18 @@ public class EditJobActivity extends AppCompatActivity {
     private String enteredTitle;
     private String enteredCompensation;
     private String enteredDescription;
-    private Button mUpdateJobButton;
-    private Button mDeleteJobButton;
+    private Button mCreateNewJobButton;
     private Context mContext = this;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_edit_job);
+        setContentView(R.layout.activity_new_job);
 
-        if (JobCollection.editJob != null) {
-            mJob = JobCollection.get(this).getJob(JobCollection.editJob);
-        }
+        mJob = new Job();
 
         mTitleField = (EditText) findViewById(R.id.job_title);
-        if (mJob.getTitle() != null) {
-            mTitleField.setText(mJob.getTitle());
-        }
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -58,24 +58,20 @@ public class EditJobActivity extends AppCompatActivity {
         });
 
         mDescriptionField = (EditText) findViewById(R.id.job_description);
-        if (mJob.getDescription() != null) {
-            mDescriptionField.setText(mJob.getDescription());
-        }
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 enteredDescription = s.toString();
             }
+
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
         mCompensationField = (EditText) findViewById(R.id.job_compensation);
-        if (mJob.getCompensation() != null) {
-            mCompensationField.setText(mJob.getCompensation());
-        }
         mCompensationField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -87,33 +83,41 @@ public class EditJobActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        mUpdateJobButton = (Button) findViewById(R.id.update_job_button);
-        mUpdateJobButton.setOnClickListener(new View.OnClickListener() {
+        mCreateNewJobButton = (Button) findViewById(R.id.create_new_job_button);
+        mCreateNewJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "Edit Job button clicked");
+                Log.d(TAG, "Create New Job button clicked");
+
+                String userName = UserCollection.get(mContext).getCurrentUserFullName();
+                Log.d(TAG, "current user's name is " + userName);
+                mJob.setPoster(userName);
+                if (mJob.getPoster() != null) {
+                    Log.d(TAG, "poster from mJob is " + mJob.getPoster());
+                }
                 mJob.setTitle(enteredTitle);
                 mJob.setCompensation(enteredCompensation);
                 mJob.setDescription(enteredDescription);
-                JobCollection.get(mContext).updateJob(mJob);
+                JobCollection.get(mContext).addJob(mJob);
                 finish();
-            }
-        });
 
-        mDeleteJobButton = (Button) findViewById(R.id.delete_job_button);
-        mDeleteJobButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "Delete Job button clicked");
-                JobCollection.get(mContext).deleteJob(mJob);
-                finish();
+                List<Job> jobs = JobCollection.get(mContext).getJobs();
+                for (Job job : jobs) {
+                    if (job.getId() != null) {Log.d(TAG, "id: " + job.getId());}
+                    if (job.getDescription() != null) {Log.d(TAG, "description: " + job.getDescription());}
+                    if (job.getCompensation() != null) {Log.d(TAG, "compensation: " + job.getCompensation());}
+                    if (job.getPoster() != null) {Log.d(TAG, "poster: " + job.getPoster());} else {Log.d(TAG, "jobPoster was NULL");}
+                    if (job.getTitle() != null) {Log.d(TAG, "title: " + job.getTitle());}
+                    Log.d(TAG, " ****************** ");
+                }
             }
         });
     }
 
     public static Intent newIntent(Context packageContext, UUID jobId) {
         Log.d(TAG, "newIntent() called");
-        Intent intent = new Intent(packageContext, EditJobActivity.class);
+        Intent intent = new Intent(packageContext, NewJobActivity.class);
+        intent.putExtra(EXTRA_JOB_ID, jobId);
         return intent;
     }
 }

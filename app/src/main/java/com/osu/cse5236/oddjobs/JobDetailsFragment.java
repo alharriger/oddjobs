@@ -12,6 +12,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.osu.cse5236.oddjobs.activities.EditJobActivity;
+import com.osu.cse5236.oddjobs.activities.PayActivity;
+
 import java.util.UUID;
 
 /**
