@@ -66,8 +66,11 @@ public class JobListFragment extends Fragment{
         switch (item.getItemId()) {
             case R.id.new_job:
                 Job job = new Job();
-                Intent intent = NewJobActivity.newIntent(getActivity(), job.getId());
-                startActivity(intent);
+                startActivity(NewJobActivity.newIntent(getActivity(), job.getId()));
+                return true;
+            case R.id.user_profile_menu_button:
+                UserCollection.get(getActivity()).profileUser = UserCollection.get(getActivity()).currentUserId;
+                startActivity(new Intent(getActivity(), UserProfileActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

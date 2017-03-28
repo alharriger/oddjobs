@@ -29,12 +29,15 @@ public class UserCollection {
     private SQLiteDatabase mDatabase;
     private static User mCurrentUser;
     private static String mCurrentUserFullName = "";
+    public static UUID profileUser; // not ideal; used to hold job viewed in UserProfileActivity
+    public static UUID currentUserId; // not ideal...
 
     public void setCurrentUser(User user) {
         Log.d(TAG, "setCurrentUser() called");
         this.mCurrentUser = user;
         if (this.mCurrentUser != null) {
             Log.d(TAG, "this.mCurrentUser is not null");
+            this.currentUserId = user.getId();
             if (this.mCurrentUser.getFirstName() != null) {
                 this.mCurrentUserFullName = mCurrentUser.getFirstName();
                 Log.d(TAG, "first name is " + this.mCurrentUserFullName);

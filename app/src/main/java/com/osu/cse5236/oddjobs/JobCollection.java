@@ -124,6 +124,4 @@ public class JobCollection {
         return values;
     }
 
-
-
 }
