@@ -24,6 +24,8 @@
     <string name="job_description_hint">Enter a description for the job.</string>
     <string name="job_compensation_label">Compensation</string>
     <string name="job_compensation_hint">How much will you pay for this job?</string>
+    <string name="job_city_label">Location in Ohio (City)</string>
+    <string name="job_city_hint">Which Ohio city is this job in?</string>
     <string name="job_completed_label">Completed</string>
     <string name="job_volunteer_button">Volunteer</string>
 

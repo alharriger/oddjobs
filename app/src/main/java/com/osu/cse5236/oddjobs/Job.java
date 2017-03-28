@@ -6,12 +6,24 @@ import java.util.UUID;
 public class Job {
     private UUID mId;
     private String mPoster = "";
-    private String mTitle;
+    private String mTitle = "";
     private String mCompensation = "";
-    private String mDescription;
+    private String mDescription = "";
     private Date mDate;
     private boolean mCompleted;
     private String mVolunteer = "";
+    private String mCity = "";
+
+    public Job() {
+        mId = UUID.randomUUID();
+        mCompensation = "";
+    }
+
+    public Job(UUID id) {
+        mId = id;
+        mCompensation = "";
+        mDate = new Date();
+    }
 
     public UUID getId() {
         return mId;
@@ -77,14 +89,11 @@ public class Job {
         this.mVolunteer = volunteer;
     }
 
-    public Job() {
-        mId = UUID.randomUUID();
-        mCompensation = "";
+    public String getCity() {
+        return mCity;
     }
 
-    public Job(UUID id) {
-        mId = id;
-        mCompensation = "";
-        mDate = new Date();
+    public void setCity(String city) {
+        this.mCity = city;
     }
 }

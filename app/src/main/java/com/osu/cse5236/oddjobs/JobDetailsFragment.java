@@ -28,15 +28,6 @@ public class JobDetailsFragment extends Fragment {
     private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
 
     private Job mJob;
-    private TextView mTitleView;
-    private TextView mPosterView;
-    private TextView mCompensationView;
-    private TextView mDescriptionView;
-    private Button mVolunteerButton;
-    private TextView mVolunteerView;
-    private Button mEditButton;
-    private Button mPayButton;
-    private CheckBox mCompletedCheckbox;
 
     public static JobDetailsFragment newInstance(UUID jobId) {
         Log.d(TAG, "newInstance() called");
@@ -68,6 +59,17 @@ public class JobDetailsFragment extends Fragment {
         Log.d(TAG, "onCreateView() called");
         View v = inflater.inflate(R.layout.fragment_job_details, container, false);
 
+        TextView mTitleView;
+        TextView mPosterView;
+        TextView mDescriptionView;
+        TextView mCompensationView;
+        TextView mCityView;
+        Button mVolunteerButton;
+        TextView mVolunteerView;
+        Button mEditButton;
+        Button mPayButton;
+        CheckBox mCompletedCheckbox;
+
         mTitleView = (TextView) v.findViewById(R.id.job_title);
         mTitleView.setText(mJob.getTitle());
 
@@ -79,7 +81,12 @@ public class JobDetailsFragment extends Fragment {
 
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
         if (mJob.getCompensation() != null) {
-            mCompensationView.setText(mJob.getCompensation().toString());
+            mCompensationView.setText(mJob.getCompensation());
+        }
+
+        mCityView = (TextView) v.findViewById(R.id.job_city);
+        if (mJob.getCity() != null) {
+            mCityView.setText(mJob.getCity());
         }
 
         mDescriptionView = (TextView) v.findViewById(R.id.job_description);
@@ -90,7 +97,7 @@ public class JobDetailsFragment extends Fragment {
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
 
-        mVolunteerView = (TextView) v.findViewById(R.id.job_poster);
+        mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
         if (mJob.getVolunteer() != null) {
             mVolunteerView.setText(mJob.getVolunteer());
         }

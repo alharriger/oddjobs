@@ -7,9 +7,6 @@ import android.util.Log;
 import com.osu.cse5236.oddjobs.User;
 import com.osu.cse5236.oddjobs.database.UserDbSchema.UserTable;
 
-import java.util.Date;
-import java.util.UUID;
-
 /**
  * Created by pavlecoric on 3/27/17.
  */
@@ -23,7 +20,6 @@ public class UserCursorWrapper extends CursorWrapper {
 
     public User getUser() {
         Log.d(TAG, "getUser() called");
-        String uuidString = getString(getColumnIndex(UserTable.Cols.UUID));
         String firstName = getString(getColumnIndex(UserTable.Cols.FIRSTNAME));
         String lastName = getString(getColumnIndex(UserTable.Cols.LASTNAME));
         String phone = getString(getColumnIndex(UserTable.Cols.PHONE));

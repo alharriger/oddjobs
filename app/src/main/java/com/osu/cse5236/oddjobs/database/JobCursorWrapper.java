@@ -24,22 +24,24 @@ public class JobCursorWrapper extends CursorWrapper {
     public Job getJob() {
         Log.d(TAG, "getJob() called");
         String uuidString = getString(getColumnIndex(JobTable.Cols.UUID));
-        String poster = getString(getColumnIndex(JobTable.Cols.POSTER));
         String title = getString(getColumnIndex(JobTable.Cols.TITLE));
-        String compensation = getString(getColumnIndex(JobTable.Cols.COMPENSATION));
+        String poster = getString(getColumnIndex(JobTable.Cols.POSTER));
         String description = getString(getColumnIndex(JobTable.Cols.DESCRIPTION));
-        long date = getLong(getColumnIndex(JobTable.Cols.DATE));
-        int isCompleted = getInt(getColumnIndex(JobTable.Cols.COMPLETED));
+        String compensation = getString(getColumnIndex(JobTable.Cols.COMPENSATION));
+        String city = getString(getColumnIndex(JobTable.Cols.CITY));
         String volunteer = getString(getColumnIndex(JobTable.Cols.VOLUNTEER));
+        int isCompleted = getInt(getColumnIndex(JobTable.Cols.COMPLETED));
+        long date = getLong(getColumnIndex(JobTable.Cols.DATE));
 
         Job job = new Job(UUID.fromString(uuidString));
         job.setTitle(title);
         job.setPoster(poster);
-        job.setCompensation(compensation);
         job.setDescription(description);
-        job.setDate(new Date(date));
-        job.setCompleted(isCompleted != 0);
+        job.setCompensation(compensation);
+        job.setCity(city);
         job.setVolunteer(volunteer);
+        job.setCompleted(isCompleted != 0);
+        job.setDate(new Date(date));
 
         return job;
     }

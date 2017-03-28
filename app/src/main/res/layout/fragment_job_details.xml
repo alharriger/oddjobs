@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        style="?android:listSeparatorTextViewStyle"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/job_title_label" />
@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
         <TextView
-            style="?android:listSeparatorTextViewStyle"
+            android:textStyle="bold"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:text="@string/job_poster_label" />
@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <TextView
-        style="?android:listSeparatorTextViewStyle"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/job_description_label"/>
@@ -46,16 +46,37 @@
         android:gravity="top"
         android:layout_marginBottom="16dp"/>
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/job_compensation_label"/>
-    <TextView
-        android:id="@+id/job_compensation"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp" >
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/job_compensation_label" />
+        <TextView
+            android:id="@+id/job_compensation"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:orientation="horizontal">
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/job_city_label" />
+        <TextView
+            android:id="@+id/job_city"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/volunteer_button"
@@ -71,13 +92,13 @@
         android:layout_marginBottom="16dp">
 
         <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="110dp"
+            android:textStyle="bold"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/job_volunteer_label" />
         <TextView
             android:id="@+id/job_volunteer"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

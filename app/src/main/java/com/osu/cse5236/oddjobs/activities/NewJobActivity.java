@@ -29,20 +29,21 @@ public class NewJobActivity extends AppCompatActivity {
 
     private Job mJob;
     private EditText mTitleField;
-    private EditText mCompensationField;
     private EditText mDescriptionField;
+    private EditText mCompensationField;
+    private EditText mCity;
     private String enteredTitle;
-    private String enteredCompensation;
     private String enteredDescription;
+    private String enteredCompensation;
+    private String enteredCity;
     private Button mCreateNewJobButton;
     private Context mContext = this;
 
     public void onCreate(Bundle savedInstanceState) {
+
         Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_new_job);
-
         mJob = new Job();
 
         mTitleField = (EditText) findViewById(R.id.job_title);
@@ -83,6 +84,18 @@ public class NewJobActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+        mCity = (EditText) findViewById(R.id.job_city);
+        mCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                enteredCity = s.toString();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
         mCreateNewJobButton = (Button) findViewById(R.id.create_new_job_button);
         mCreateNewJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,23 +104,21 @@ public class NewJobActivity extends AppCompatActivity {
 
                 String userName = UserCollection.get(mContext).getCurrentUserFullName();
                 Log.d(TAG, "current user's name is " + userName);
-                mJob.setPoster(userName);
-                if (mJob.getPoster() != null) {
-                    Log.d(TAG, "poster from mJob is " + mJob.getPoster());
-                }
                 mJob.setTitle(enteredTitle);
-                mJob.setCompensation(enteredCompensation);
+                mJob.setPoster(userName);
                 mJob.setDescription(enteredDescription);
+                mJob.setCompensation(enteredCompensation);
+                mJob.setCity(enteredCity);
                 JobCollection.get(mContext).addJob(mJob);
                 finish();
 
                 List<Job> jobs = JobCollection.get(mContext).getJobs();
                 for (Job job : jobs) {
                     if (job.getId() != null) {Log.d(TAG, "id: " + job.getId());}
+                    if (job.getTitle() != null) {Log.d(TAG, "title: " + job.getTitle());}
+                    if (job.getPoster() != null) {Log.d(TAG, "poster: " + job.getPoster());}
                     if (job.getDescription() != null) {Log.d(TAG, "description: " + job.getDescription());}
                     if (job.getCompensation() != null) {Log.d(TAG, "compensation: " + job.getCompensation());}
-                    if (job.getPoster() != null) {Log.d(TAG, "poster: " + job.getPoster());} else {Log.d(TAG, "jobPoster was NULL");}
-                    if (job.getTitle() != null) {Log.d(TAG, "title: " + job.getTitle());}
                     Log.d(TAG, " ****************** ");
                 }
             }
