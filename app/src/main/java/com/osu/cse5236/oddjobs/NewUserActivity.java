@@ -142,6 +142,7 @@ public class NewUserActivity extends AppCompatActivity {
 
                 // Test code
                 UserCollection.get(mContext).addUser(mUser);
+                UserCollection.get(mContext).setCurrentUser(mUser);
                 UUID id = mUser.getId();
 
                 User testUser = UserCollection.get(mContext).getUser(id);

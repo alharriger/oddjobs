@@ -144,9 +144,9 @@ public class JobListActivity extends SingleFragmentActivity {
                     "Location changed: Lat: " + loc.getLatitude() + " Lng: "
                             + loc.getLongitude(), Toast.LENGTH_SHORT).show();
             String longitude = "Longitude: " + loc.getLongitude();
-            Log.v(TAG, SUB_TAG + longitude);
+//            Log.v(TAG, SUB_TAG + " " + longitude);
             String latitude = "Latitude: " + loc.getLatitude();
-            Log.v(TAG, SUB_TAG + latitude);
+//            Log.v(TAG, SUB_TAG + " " + latitude);
 
         /*------- To get city name from coordinates -------- */
             String cityName = null;

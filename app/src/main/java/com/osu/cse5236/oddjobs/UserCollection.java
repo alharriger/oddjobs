@@ -30,9 +30,9 @@ public class UserCollection {
     private static User mCurrentUser;
     private static String mCurrentUserFullName = "";
 
-    public void setCurrentUserId(UUID userId) {
-        Log.d(TAG, "setCurrentUserId() called");
-        this.mCurrentUser = this.getUser(userId);
+    public void setCurrentUser(User user) {
+        Log.d(TAG, "setCurrentUser() called");
+        this.mCurrentUser = user;
         if (this.mCurrentUser != null) {
             Log.d(TAG, "this.mCurrentUser is not null");
             if (this.mCurrentUser.getFirstName() != null) {
@@ -40,7 +40,7 @@ public class UserCollection {
                 Log.d(TAG, "first name is " + this.mCurrentUserFullName);
             }
             if (this.mCurrentUser.getLastName() != null) {
-                this.mCurrentUserFullName = this.mCurrentUserFullName + mCurrentUser.getLastName();
+                this.mCurrentUserFullName = this.mCurrentUserFullName + " " + mCurrentUser.getLastName();
                 Log.d(TAG, "full name is " + this.mCurrentUserFullName);
             }
         } else {

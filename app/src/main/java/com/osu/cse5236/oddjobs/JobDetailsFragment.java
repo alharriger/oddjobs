@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -124,6 +125,18 @@ public class JobDetailsFragment extends Fragment {
 
         String userName = UserCollection.get(getActivity()).getCurrentUserFullName();
         Log.d(TAG, "current user's name is " + userName);
+
+        List<User> users = UserCollection.get(getActivity()).getUsers();
+        Log.d(TAG, "User collection:");
+        for (User user : users) {
+            if (user.getId() != null) {Log.d(TAG, "id: " + user.getId());}
+            if (user.getFirstName() != null) {Log.d(TAG, "first name: " + user.getFirstName());}
+            if (user.getLastName() != null) {Log.d(TAG, "last name: " + user.getLastName());}
+            if (user.getPhone() != null) {Log.d(TAG, "phone: " + user.getPhone());}
+            if (user.getEmail() != null) {Log.d(TAG, "email: " + user.getEmail());}
+            if (user.getPassword() != null) {Log.d(TAG, "password: " + user.getPassword());}
+            Log.d(TAG, " *********************** ");
+        }
 
         return v;
     }
