@@ -69,7 +69,7 @@ public class JobListFragment extends Fragment{
                 startActivity(NewJobActivity.newIntent(getActivity(), job.getId()));
                 return true;
             case R.id.user_profile_menu_button:
-                UserCollection.get(getActivity()).profileUser = UserCollection.get(getActivity()).currentUserId;
+                UserCollection.profileUserEmail = UserCollection.currentUserEmail;
                 startActivity(new Intent(getActivity(), UserProfileActivity.class));
                 return true;
             default:
