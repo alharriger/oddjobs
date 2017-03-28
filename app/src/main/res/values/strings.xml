@@ -37,4 +37,12 @@
     <string name="job_poster_label">Posted by:</string>
     <string name="job_volunteer_label">Volunteered for by:</string>
     <string name="pay_button">Pay Volunteer</string>
+
+
+    <string name="last_name_hint">e.g. Smith</string>
+    <string name="first_name_hint">e.g. James</string>
+    <string name="phone_hint">1-800-555-5555</string>
+    <string name="password_hint">Please enter a strong password.</string>
+    <string name="confirm_password_hint">Please reenter your password.</string>
+    <string name="email_hint">james.smith@gmail.com</string>
 </resources>

@@ -16,7 +16,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/first_name"
-        android:text="James" />
+        android:hint="@string/first_name_hint" />
 
     <TextView
         android:text="Last Name:"
@@ -30,7 +30,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/last_name"
-        android:text="Gosling" />
+        android:hint="@string/last_name_hint" />
 
     <TextView
         android:text="Phone Number:"
@@ -44,7 +44,7 @@
         android:inputType="phone"
         android:ems="10"
         android:id="@+id/phone"
-        android:text="1-800-633-5672" />
+        android:hint="@string/phone_hint" />
 
     <TextView
         android:text="Email:"
@@ -58,7 +58,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email"
-        android:text="inventor@java.com" />
+        android:hint="@string/email_hint" />
 
     <TextView
         android:text="Enter Password:"
@@ -72,7 +72,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/Password"
-        android:text="samplepassword" />
+        android:hint="@string/password_hint" />
 
     <TextView
         android:text="Confirm Password:"
@@ -86,7 +86,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/confirm_password"
-        android:text="confirmationpa" />
+        android:hint="@string/confirm_password_hint" />
 
     <Button
         android:text="Register User"

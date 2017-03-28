@@ -36,16 +36,18 @@ public class JobListActivity extends SingleFragmentActivity {
 
     private Boolean flag = false;
 
+    private String mCurrentUser = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate called");
         super.onCreate(savedInstanceState);
 
+        mCurrentUser = UserCollection.get(this).getCurrentUserFullName();
+        Log.d(TAG, "current user is " + mCurrentUser);
+
         flag = displayGpsStatus();
-        System.out.println("RAWR flag is: " + flag.toString());
-        System.out.println("RAWR flag is: " + flag.toString());
-        System.out.println("RAWR flag is: " + flag.toString());
-        System.out.println("RAWR flag is: " + flag.toString());
+        System.out.println("RAWR displayGpsStatus is: " + flag.toString());
         if (flag) {
             locationListener = new JobListActivity.MyLocationListener();
             locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

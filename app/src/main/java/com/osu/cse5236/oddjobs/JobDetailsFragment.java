@@ -122,6 +122,9 @@ public class JobDetailsFragment extends Fragment {
             }
         });
 
+        String userName = UserCollection.get(getActivity()).getCurrentUserFullName();
+        Log.d(TAG, "current user's name is " + userName);
+
         return v;
     }
 }

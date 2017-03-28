@@ -413,7 +413,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Log.d(TAG, "onResume() called");
 
         // test code
-        List<User> users = UserCollection.get(this).getUsers();
+        List<User> users = UserCollection.get(LoginActivity.this).getUsers();
         for (User user : users) {
             if (user.getId() != null) {Log.d(TAG, "id: " + user.getId());}
             if (user.getFirstName() != null) {Log.d(TAG, "first name: " + user.getFirstName());}
