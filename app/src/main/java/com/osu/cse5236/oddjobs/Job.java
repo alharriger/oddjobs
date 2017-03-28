@@ -79,16 +79,12 @@ public class Job {
 
     public Job() {
         mId = UUID.randomUUID();
-        mPoster = "None (TODO attach to User)";
         mCompensation = "";
-        mVolunteer = "None. Volunteer please. :)";
     }
 
     public Job(UUID id) {
         mId = id;
-        mPoster = "None (TODO attach to User)";
         mCompensation = "";
         mDate = new Date();
-        mVolunteer = "None. Volunteer please. :)";
     }
 }

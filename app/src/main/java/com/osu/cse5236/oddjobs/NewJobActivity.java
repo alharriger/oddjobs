@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -82,14 +83,30 @@ public class NewJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Create New Job button clicked");
+
+                String userName = UserCollection.get(mContext).getCurrentUserFullName();
+                Log.d(TAG, "current user's name is " + userName);
+                mJob.setPoster(userName);
+                if (mJob.getPoster() != null) {
+                    Log.d(TAG, "poster from mJob is " + mJob.getPoster());
+                }
                 mJob.setTitle(enteredTitle);
                 mJob.setCompensation(enteredCompensation);
                 mJob.setDescription(enteredDescription);
                 JobCollection.get(mContext).addJob(mJob);
                 finish();
+
+                List<Job> jobs = JobCollection.get(mContext).getJobs();
+                for (Job job : jobs) {
+                    if (job.getId() != null) {Log.d(TAG, "id: " + job.getId());}
+                    if (job.getDescription() != null) {Log.d(TAG, "description: " + job.getDescription());}
+                    if (job.getCompensation() != null) {Log.d(TAG, "compensation: " + job.getCompensation());}
+                    if (job.getPoster() != null) {Log.d(TAG, "poster: " + job.getPoster());} else {Log.d(TAG, "jobPoster was NULL");}
+                    if (job.getTitle() != null) {Log.d(TAG, "title: " + job.getTitle());}
+                    Log.d(TAG, " ****************** ");
+                }
             }
         });
-
     }
 
     public static Intent newIntent(Context packageContext, UUID jobId) {
