@@ -418,7 +418,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (user.getId() != null) {Log.d(TAG, "id: " + user.getId());}
             if (user.getFirstName() != null) {Log.d(TAG, "first name: " + user.getFirstName());}
             if (user.getLastName() != null) {Log.d(TAG, "last name: " + user.getLastName());}
-            if (user.getPhone() != null) {Log.d(TAG, "phone: " + user.getPassword());}
+            if (user.getPhone() != null) {Log.d(TAG, "phone: " + user.getPhone());}
             if (user.getEmail() != null) {Log.d(TAG, "email: " + user.getEmail());}
             if (user.getPassword() != null) {Log.d(TAG, "password: " + user.getPassword());}
             Log.d(TAG, " *********************** ");
