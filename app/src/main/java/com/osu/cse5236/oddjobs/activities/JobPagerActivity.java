@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.osu.cse5236.oddjobs.Job;
+import com.osu.cse5236.oddjobs.JobCollection;
+import com.osu.cse5236.oddjobs.JobDetailsFragment;
+import com.osu.cse5236.oddjobs.R;
 
 import java.util.List;
 import java.util.UUID;

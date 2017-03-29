@@ -24,6 +24,8 @@
     <string name="job_description_hint">Enter a description for the job.</string>
     <string name="job_compensation_label">Compensation</string>
     <string name="job_compensation_hint">How much will you pay for this job?</string>
+    <string name="job_city_label">Location in Ohio (City)</string>
+    <string name="job_city_hint">Which Ohio city is this job in?</string>
     <string name="job_completed_label">Completed</string>
     <string name="job_volunteer_button">Volunteer</string>
 
@@ -31,8 +33,24 @@
 
     <!-- Toolbar -->
     <string name="new_job">New Job</string>
+
     <string name="update_job_button">Update Job</string>
     <string name="delete_job_button">Delete Job</string>
-    <string name="job_poster_label">Posted by:</string>
-    <string name="job_volunteer_label">Volunteered for by:</string>
+    <string name="job_poster_label">Posted by</string>
+    <string name="job_volunteer_label">Volunteered for by</string>
+    <string name="pay_button">Pay Volunteer</string>
+
+
+    <string name="last_name_hint">e.g. Smith</string>
+    <string name="first_name_hint">e.g. James</string>
+    <string name="phone_hint">1-800-555-5555</string>
+    <string name="password_hint">Please enter a strong password.</string>
+    <string name="confirm_password_hint">Please reenter your password.</string>
+    <string name="email_hint">james.smith@gmail.com</string>
+
+    <string name="last_name_label">Last name</string>
+    <string name="first_name_label">First name</string>
+    <string name="phone_label">Phone number</string>
+    <string name="email_label">Email</string>
+    <string name="profile">User Profile</string>
 </resources>

@@ -1,10 +1,5 @@
 package com.osu.cse5236.oddjobs;
 
-import android.provider.ContactsContract;
-
-import com.osu.cse5236.oddjobs.Job;
-
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -18,7 +13,6 @@ public class User {
     private String mEmail;
     private String mPhone;
     private String mPassword;
-
 
     public String getFirstName() {
         return mFirstName;

@@ -1,9 +1,11 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+
+import com.osu.cse5236.oddjobs.R;
 
 /**
  * Created by Zenith on 3/25/2017.
