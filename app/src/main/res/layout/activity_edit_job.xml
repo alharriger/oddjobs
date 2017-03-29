@@ -1,75 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    android:orientation="vertical">
+    android:layout_width="match_parent">
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/job_title_label" />
-    <EditText
-        android:id="@+id/job_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:hint="@string/job_title_hint"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/job_description_label"/>
-    <EditText
-        android:id="@+id/job_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="4"
-        android:gravity="top"
-        android:hint="@string/job_description_hint"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/job_title_label" />
+        <EditText
+            android:id="@+id/job_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="@string/job_title_hint"
+            android:layout_marginBottom="16dp"/>
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/job_compensation_label"/>
-    <EditText
-        android:id="@+id/job_compensation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:inputType="numberDecimal"
-        android:hint="@string/job_compensation_hint"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/job_description_label"/>
+        <EditText
+            android:id="@+id/job_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="4"
+            android:gravity="top"
+            android:hint="@string/job_description_hint"
+            android:layout_marginBottom="16dp"/>
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/job_city_label"/>
-    <EditText
-        android:id="@+id/job_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:hint="@string/job_city_hint"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/job_compensation_label"/>
+        <EditText
+            android:id="@+id/job_compensation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:hint="@string/job_compensation_hint"
+            android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/update_job_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/update_job_button" />
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/job_city_label"/>
+        <EditText
+            android:id="@+id/job_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="@string/job_city_hint"
+            android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/delete_job_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_job_button" />
+        <Button
+            android:id="@+id/update_job_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_job_button" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/delete_job_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_job_button" />
+
+    </LinearLayout>
+</ScrollView>
