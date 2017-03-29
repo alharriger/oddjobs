@@ -13,6 +13,8 @@ public class Job {
     private boolean mCompleted;
     private String mVolunteer = "";
     private String mCity = "";
+    private double mLongitude = 0;
+    private double mLatitude = 0;
 
     public Job() {
         mId = UUID.randomUUID();
@@ -95,5 +97,21 @@ public class Job {
 
     public void setCity(String city) {
         this.mCity = city;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public void setLongitude(double longitude) {
+        mLongitude = longitude;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public void setLatitude(double latitude) {
+        mLatitude = latitude;
     }
 }
