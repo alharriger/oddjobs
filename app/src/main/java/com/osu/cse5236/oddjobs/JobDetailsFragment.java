@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.osu.cse5236.oddjobs.activities.EditJobActivity;
+import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.PayActivity;
 
 import java.util.UUID;
@@ -64,6 +65,7 @@ public class JobDetailsFragment extends Fragment {
         TextView mDescriptionView;
         TextView mCompensationView;
         TextView mCityView;
+        Button mViewMapButton;
         Button mVolunteerButton;
         TextView mVolunteerView;
         Button mEditButton;
@@ -93,6 +95,16 @@ public class JobDetailsFragment extends Fragment {
         if (mJob.getDescription() != null) {
             mDescriptionView.setText(mJob.getDescription());
         }
+
+        mViewMapButton = (Button) v.findViewById(R.id.view_map_button);
+        mViewMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "View map button clicked");
+                Intent intent = new Intent(getActivity(), JobMapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
