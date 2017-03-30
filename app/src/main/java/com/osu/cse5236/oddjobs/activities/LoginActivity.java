@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,6 +29,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.osu.cse5236.oddjobs.R;
+import com.osu.cse5236.oddjobs.User;
+import com.osu.cse5236.oddjobs.UserCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -362,7 +366,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             for (User user : users) {
                 if (user.getEmail().equals(mEmail)) {
                     userId = user.getId();
-                    UserCollection.get(getApplicationContext()).setCurrentUserId(userId);
+                    UserCollection.get(LoginActivity.this).setCurrentUser(user);
                     // Account exists, return true if the password matches.
                     if (user.getPassword() != null ) {
                         return user.getPassword().equals(mPassword);
@@ -413,7 +417,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Log.d(TAG, "onResume() called");
 
         // test code
-        List<User> users = UserCollection.get(this).getUsers();
+        List<User> users = UserCollection.get(LoginActivity.this).getUsers();
         for (User user : users) {
             if (user.getId() != null) {Log.d(TAG, "id: " + user.getId());}
             if (user.getFirstName() != null) {Log.d(TAG, "first name: " + user.getFirstName());}

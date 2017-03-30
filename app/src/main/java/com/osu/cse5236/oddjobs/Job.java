@@ -6,12 +6,26 @@ import java.util.UUID;
 public class Job {
     private UUID mId;
     private String mPoster = "";
-    private String mTitle;
+    private String mTitle = "";
     private String mCompensation = "";
-    private String mDescription;
+    private String mDescription = "";
     private Date mDate;
     private boolean mCompleted;
     private String mVolunteer = "";
+    private String mCity = "";
+    private double mLongitude = 0;
+    private double mLatitude = 0;
+
+    public Job() {
+        mId = UUID.randomUUID();
+        mCompensation = "";
+    }
+
+    public Job(UUID id) {
+        mId = id;
+        mCompensation = "";
+        mDate = new Date();
+    }
 
     public UUID getId() {
         return mId;
@@ -77,18 +91,27 @@ public class Job {
         this.mVolunteer = volunteer;
     }
 
-    public Job() {
-        mId = UUID.randomUUID();
-        mPoster = "None (TODO attach to User)";
-        mCompensation = "";
-        mVolunteer = "None. Volunteer please. :)";
+    public String getCity() {
+        return mCity;
     }
 
-    public Job(UUID id) {
-        mId = id;
-        mPoster = "None (TODO attach to User)";
-        mCompensation = "";
-        mDate = new Date();
-        mVolunteer = "None. Volunteer please. :)";
+    public void setCity(String city) {
+        this.mCity = city;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public void setLongitude(double longitude) {
+        mLongitude = longitude;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public void setLatitude(double latitude) {
+        mLatitude = latitude;
     }
 }

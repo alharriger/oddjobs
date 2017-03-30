@@ -27,10 +27,32 @@ public class UserCollection {
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
-    private static UUID mUserId;
+    private static User mCurrentUser;
+    private static String mCurrentUserFullName = "";
+    public static String profileUserEmail; // not ideal; used to hold job viewed in UserProfileActivity
+    public static String currentUserEmail; // not ideal...
 
-    public void setCurrentUserId(UUID userId) {
-        this.mUserId = userId;
+    public void setCurrentUser(User user) {
+        Log.d(TAG, "setCurrentUser() called");
+        this.mCurrentUser = user;
+        if (this.mCurrentUser != null) {
+            Log.d(TAG, "this.mCurrentUser is not null");
+            this.currentUserEmail = user.getEmail();
+            if (this.mCurrentUser.getFirstName() != null) {
+                this.mCurrentUserFullName = mCurrentUser.getFirstName();
+                Log.d(TAG, "first name is " + this.mCurrentUserFullName);
+            }
+            if (this.mCurrentUser.getLastName() != null) {
+                this.mCurrentUserFullName = this.mCurrentUserFullName + " " + mCurrentUser.getLastName();
+                Log.d(TAG, "full name is " + this.mCurrentUserFullName);
+            }
+        } else {
+            Log.d(TAG, "this.mCurrentUser is null");
+        }
+    }
+
+    public String getCurrentUserFullName() {
+        return this.mCurrentUserFullName;
     }
 
     public static UserCollection get(Context context) {

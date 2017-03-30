@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -19,6 +19,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.osu.cse5236.oddjobs.JobListFragment;
+import com.osu.cse5236.oddjobs.UserCollection;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -36,16 +39,18 @@ public class JobListActivity extends SingleFragmentActivity {
 
     private Boolean flag = false;
 
+    private String mCurrentUser = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate called");
         super.onCreate(savedInstanceState);
 
+        mCurrentUser = UserCollection.get(this).getCurrentUserFullName();
+        Log.d(TAG, "current user is " + mCurrentUser);
+
         flag = displayGpsStatus();
-        System.out.println("RAWR flag is: " + flag.toString());
-        System.out.println("RAWR flag is: " + flag.toString());
-        System.out.println("RAWR flag is: " + flag.toString());
-        System.out.println("RAWR flag is: " + flag.toString());
+        System.out.println("RAWR displayGpsStatus is: " + flag.toString());
         if (flag) {
             locationListener = new JobListActivity.MyLocationListener();
             locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -142,9 +147,9 @@ public class JobListActivity extends SingleFragmentActivity {
                     "Location changed: Lat: " + loc.getLatitude() + " Lng: "
                             + loc.getLongitude(), Toast.LENGTH_SHORT).show();
             String longitude = "Longitude: " + loc.getLongitude();
-            Log.v(TAG, SUB_TAG + longitude);
+//            Log.v(TAG, SUB_TAG + " " + longitude);
             String latitude = "Latitude: " + loc.getLatitude();
-            Log.v(TAG, SUB_TAG + latitude);
+//            Log.v(TAG, SUB_TAG + " " + latitude);
 
         /*------- To get city name from coordinates -------- */
             String cityName = null;

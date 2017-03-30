@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:weightSum="1">
 
     <TextView
@@ -15,7 +17,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/first_name" />
+        android:id="@+id/first_name"
+        android:hint="@string/first_name_hint" />
 
     <TextView
         android:text="Last Name:"
@@ -28,7 +31,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/last_name" />
+        android:id="@+id/last_name"
+        android:hint="@string/last_name_hint" />
 
     <TextView
         android:text="Phone Number:"
@@ -41,7 +45,8 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/phone" />
+        android:id="@+id/phone"
+        android:hint="@string/phone_hint" />
 
     <TextView
         android:text="Email:"
@@ -54,7 +59,8 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/email" />
+        android:id="@+id/email"
+        android:hint="@string/email_hint" />
 
     <TextView
         android:text="Enter Password:"
@@ -67,7 +73,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/Password" />
+        android:id="@+id/Password"
+        android:hint="@string/password_hint" />
 
     <TextView
         android:text="Confirm Password:"
@@ -80,7 +87,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/confirm_password" />
+        android:id="@+id/confirm_password"
+        android:hint="@string/confirm_password_hint" />
 
     <Button
         android:text="Register User"

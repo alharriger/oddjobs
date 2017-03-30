@@ -118,12 +118,11 @@ public class JobCollection {
         values.put(JobTable.Cols.POSTER, job.getPoster());
         values.put(JobTable.Cols.COMPENSATION, job.getCompensation());
         values.put(JobTable.Cols.DESCRIPTION, job.getDescription());
-//        values.put(JobTable.Cols.DATE, job.getDate().getTime());
+        values.put(JobTable.Cols.CITY, job.getCity());
         values.put(JobTable.Cols.COMPLETED, job.isCompleted() ? 1 : 0);
+//        values.put(JobTable.Cols.DATE, job.getDate().getTime());
 
         return values;
     }
-
-
 
 }

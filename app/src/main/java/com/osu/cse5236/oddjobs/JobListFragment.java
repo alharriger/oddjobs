@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.osu.cse5236.oddjobs.activities.JobPagerActivity;
+import com.osu.cse5236.oddjobs.activities.NewJobActivity;
+import com.osu.cse5236.oddjobs.activities.UserProfileActivity;
+
 import java.util.List;
 
 /**
@@ -66,8 +70,11 @@ public class JobListFragment extends Fragment{
         switch (item.getItemId()) {
             case R.id.new_job:
                 Job job = new Job();
-                Intent intent = NewJobActivity.newIntent(getActivity(), job.getId());
-                startActivity(intent);
+                startActivity(NewJobActivity.newIntent(getActivity(), job.getId()));
+                return true;
+            case R.id.user_profile_menu_button:
+                UserCollection.profileUserEmail = UserCollection.currentUserEmail;
+                startActivity(new Intent(getActivity(), UserProfileActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

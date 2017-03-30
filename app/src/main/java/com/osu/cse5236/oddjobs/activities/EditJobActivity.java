@@ -1,4 +1,4 @@
-package com.osu.cse5236.oddjobs;
+package com.osu.cse5236.oddjobs.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.osu.cse5236.oddjobs.Job;
+import com.osu.cse5236.oddjobs.JobCollection;
+import com.osu.cse5236.oddjobs.R;
 
 import java.util.UUID;
 

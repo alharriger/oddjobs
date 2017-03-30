@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="30dp" >
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/first_name_label" />
+        <TextView
+            android:id="@+id/user_first_name"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp" >
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/last_name_label" />
+        <TextView
+            android:id="@+id/user_last_name"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp" >
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_label" />
+        <TextView
+            android:id="@+id/user_phone"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp" >
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/email_label" />
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
