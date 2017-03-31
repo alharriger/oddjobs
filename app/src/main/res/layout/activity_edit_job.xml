@@ -52,19 +52,6 @@
             android:hint="@string/job_compensation_hint"
             android:layout_marginBottom="16dp"/>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/job_city_label"/>
-        <EditText
-            android:id="@+id/job_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:hint="@string/job_city_hint"
-            android:layout_marginBottom="16dp"/>
-
         <Button
             android:id="@+id/update_job_button"
             android:layout_width="match_parent"
