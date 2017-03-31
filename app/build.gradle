@@ -47,6 +47,10 @@ dependencies {
     compile 'com.sun.mail:android-activation:1.5.5'
 }
 
+dependencies {
+    compile 'com.google.android.gms:play-services-maps:+'
+    compile 'com.android.support:appcompat-v7:23.+'
+}
 android {
     useLibrary 'org.apache.http.legacy'
 }
