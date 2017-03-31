@@ -18,6 +18,8 @@ public class JobDbSchema {
             public static final String COMPLETED = "completed";
             public static final String VOLUNTEER = "volunteer";
             public static final String CITY = "CITY";
+            public static final String LONGITUDE = "LONGITUDE";
+            public static final String LATITUDE = "LATITUDE";
         }
     }
 }

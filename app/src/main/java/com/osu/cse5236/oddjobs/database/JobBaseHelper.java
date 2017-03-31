@@ -29,6 +29,8 @@ public class JobBaseHelper extends SQLiteOpenHelper {
                 JobTable.Cols.COMPLETED + "," +
                 JobTable.Cols.VOLUNTEER + "," +
                 JobTable.Cols.CITY + "," +
+                JobTable.Cols.LONGITUDE + "," +
+                JobTable.Cols.LATITUDE + "," +
                 JobTable.Cols.DATE + ")"
         );
     }
