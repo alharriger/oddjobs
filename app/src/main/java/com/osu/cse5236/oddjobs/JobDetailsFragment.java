@@ -1,5 +1,6 @@
 package com.osu.cse5236.oddjobs;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.osu.cse5236.oddjobs.activities.EditJobActivity;
 import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.PayActivity;
 
+
 import java.util.UUID;
 
 /**
@@ -27,6 +29,7 @@ public class JobDetailsFragment extends Fragment {
     private static final String TAG = "JobDetailsFragment RAWR";
     private static final String ARG_JOB_ID = "job_id";
     private static final String EXTRA_JOB_ID = "com.osu.oddjobs.job_id";
+
 
     private Job mJob;
 
@@ -108,6 +111,13 @@ public class JobDetailsFragment extends Fragment {
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
+        mVolunteerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Volunteer button clicked");
+                mJob.setVolunteer(UserCollection.get(getContext()).getCurrentUserFullName());
+            }
+        });
 
         mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
         if (mJob.getVolunteer() != null) {
@@ -144,9 +154,7 @@ public class JobDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        String userName = UserCollection.get(getActivity()).getCurrentUserFullName();
-        Log.d(TAG, "current user's name is " + userName);
+        
 
 //        List<User> users = UserCollection.get(getActivity()).getUsers();
 //        Log.d(TAG, "User collection:");
