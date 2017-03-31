@@ -1,6 +1,5 @@
 package com.osu.cse5236.oddjobs.activities;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,6 +10,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.osu.cse5236.oddjobs.R;
+import com.osu.cse5236.oddjobs.UserCollection;
 
 public class JobMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -26,7 +26,6 @@ public class JobMapActivity extends AppCompatActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -41,7 +40,7 @@ public class JobMapActivity extends AppCompatActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(UserCollection.currentUserLatitude, UserCollection.currentUserLongitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
