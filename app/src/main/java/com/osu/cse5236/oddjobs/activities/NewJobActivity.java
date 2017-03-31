@@ -31,11 +31,9 @@ public class NewJobActivity extends AppCompatActivity {
     private EditText mTitleField;
     private EditText mDescriptionField;
     private EditText mCompensationField;
-    private EditText mCity;
     private String enteredTitle;
     private String enteredDescription;
     private String enteredCompensation;
-    private String enteredCity;
     private Button mCreateNewJobButton;
     private Context mContext = this;
 
@@ -84,18 +82,6 @@ public class NewJobActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        mCity = (EditText) findViewById(R.id.job_city);
-        mCity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                enteredCity = s.toString();
-            }
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
-
         mCreateNewJobButton = (Button) findViewById(R.id.create_new_job_button);
         mCreateNewJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +94,6 @@ public class NewJobActivity extends AppCompatActivity {
                 mJob.setPoster(userName);
                 mJob.setDescription(enteredDescription);
                 mJob.setCompensation(enteredCompensation);
-                mJob.setCity(enteredCity);
                 JobCollection.get(mContext).addJob(mJob);
                 finish();
 
