@@ -38,10 +38,9 @@ public class JobMapActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(UserCollection.currentUserLatitude, UserCollection.currentUserLongitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng jobLocation = new LatLng(UserCollection.currentUserLatitude, UserCollection.currentUserLongitude);
+        mMap.addMarker(new MarkerOptions().position(jobLocation).title("Marker of job location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(jobLocation));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
     }
 }
