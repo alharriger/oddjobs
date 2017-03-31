@@ -146,10 +146,8 @@ public class JobListActivity extends SingleFragmentActivity {
                     getBaseContext(),
                     "Location changed: Lat: " + loc.getLatitude() + " Lng: "
                             + loc.getLongitude(), Toast.LENGTH_SHORT).show();
-            String longitude = "Longitude: " + loc.getLongitude();
-//            Log.v(TAG, SUB_TAG + " " + longitude);
-            String latitude = "Latitude: " + loc.getLatitude();
-//            Log.v(TAG, SUB_TAG + " " + latitude);
+            UserCollection.currentUserLongitude = loc.getLongitude();
+            UserCollection.currentUserLatitude = loc.getLatitude();
 
         /*------- To get city name from coordinates -------- */
             String cityName = null;
@@ -166,8 +164,7 @@ public class JobListActivity extends SingleFragmentActivity {
             catch (IOException e) {
                 e.printStackTrace();
             }
-            String s = "RAWR My Current City is: " + cityName;
-            System.out.println(s);
+            UserCollection.currentUserCity = cityName;
         }
 
         @Override

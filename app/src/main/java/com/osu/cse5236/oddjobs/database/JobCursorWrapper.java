@@ -29,6 +29,8 @@ public class JobCursorWrapper extends CursorWrapper {
         String description = getString(getColumnIndex(JobTable.Cols.DESCRIPTION));
         String compensation = getString(getColumnIndex(JobTable.Cols.COMPENSATION));
         String city = getString(getColumnIndex(JobTable.Cols.CITY));
+        double longitude = getDouble(getColumnIndex(JobTable.Cols.LONGITUDE));
+        double latitude = getDouble(getColumnIndex(JobTable.Cols.LATITUDE));
         String volunteer = getString(getColumnIndex(JobTable.Cols.VOLUNTEER));
         int isCompleted = getInt(getColumnIndex(JobTable.Cols.COMPLETED));
         long date = getLong(getColumnIndex(JobTable.Cols.DATE));
@@ -39,6 +41,8 @@ public class JobCursorWrapper extends CursorWrapper {
         job.setDescription(description);
         job.setCompensation(compensation);
         job.setCity(city);
+        job.setLongitude(longitude);
+        job.setLatitude(latitude);
         job.setVolunteer(volunteer);
         job.setCompleted(isCompleted != 0);
         job.setDate(new Date(date));

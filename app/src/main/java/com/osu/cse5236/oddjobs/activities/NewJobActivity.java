@@ -94,6 +94,9 @@ public class NewJobActivity extends AppCompatActivity {
                 mJob.setPoster(userName);
                 mJob.setDescription(enteredDescription);
                 mJob.setCompensation(enteredCompensation);
+                mJob.setCity(UserCollection.currentUserCity);
+                mJob.setLongitude(UserCollection.currentUserLongitude);
+                mJob.setLatitude(UserCollection.currentUserLatitude);
                 JobCollection.get(mContext).addJob(mJob);
                 finish();
 

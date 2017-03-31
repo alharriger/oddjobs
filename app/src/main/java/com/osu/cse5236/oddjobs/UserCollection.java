@@ -29,8 +29,14 @@ public class UserCollection {
     private SQLiteDatabase mDatabase;
     private static User mCurrentUser;
     private static String mCurrentUserFullName = "";
-    public static String profileUserEmail; // not ideal; used to hold job viewed in UserProfileActivity
-    public static String currentUserEmail; // not ideal...
+
+    // These variables are used as "global" variables, for the current user session.
+    // It feels hacky and not ideal; maybe refactor when possible.
+    public static String profileUserEmail;
+    public static String currentUserEmail;
+    public static double currentUserLongitude = 0.0;
+    public static double currentUserLatitude = 0.0;
+    public static String currentUserCity = "temp";
 
     public void setCurrentUser(User user) {
         Log.d(TAG, "setCurrentUser() called");
