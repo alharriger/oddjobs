@@ -58,4 +58,9 @@
     <string name="ok_button">OK</string>
     <string name="title_activity_job_map">Map</string>
     <string name="job_map_button">View Job Location</string>
+    <string name="edit_profile_button">Edit Profile</string>
+    <string name="user_first_name_label">First Name</string>
+    <string name="user_last_name_label">Last Name</string>
+    <string name="user_phone_number_label">Phone Number</string>
+    <string name="user_email_address_label">Email Address</string>
 </resources>
