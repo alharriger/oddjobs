@@ -119,13 +119,20 @@ public class JobDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Volunteer button clicked");
-                mJob.setVolunteer(UserCollection.get(getContext()).getCurrentUserFullName());
+                JobCollection.currentJobLatitude = mJob.getLatitude();
+                JobCollection.currentJobLongitude = mJob.getLongitude();
+                JobCollection.jobPosterName = mJob.getPoster();
+                JobCollection.jobPosterPhone = mJob.getPosterPhone();
+                JobCollection.jobPosterEmail = mJob.getPosterEmail();
+                mJob.setVolunteer(UserCollection.mCurrentUserFullName);
+                Intent intent = new Intent(getActivity(), JobMapActivity.class);
+                startActivity(intent);
             }
         });
 
         mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
         if (mJob.getVolunteer() != null) {
-            mVolunteerView.setText(mJob.getVolunteer());
+            mVolunteerView.setText(UserCollection.mCurrentUserFullName);
         }
 
         mCompletedCheckbox = (CheckBox)v.findViewById(R.id.job_completed);

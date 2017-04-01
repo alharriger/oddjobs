@@ -90,11 +90,14 @@ public class NewJobActivity extends AppCompatActivity {
                 String userName = UserCollection.get(mContext).getCurrentUserFullName();
                 Log.d(TAG, "current user's name is " + userName);
                 mJob.setTitle(enteredTitle);
-                mJob.setPoster(userName);
+                mJob.setPoster(UserCollection.mCurrentUserFullName);
+                mJob.setPosterPhone(UserCollection.currentUserPhone);
+                mJob.setPosterEmail(UserCollection.currentUserEmail);
+
                 mJob.setDescription(enteredDescription);
                 mJob.setCompensation(enteredCompensation);
-                mJob.setCity(UserCollection.currentUserCity);
 
+                mJob.setCity(UserCollection.currentUserCity);
                 mJob.setLongitude(UserCollection.currentUserLongitude);
                 mJob.setLatitude(UserCollection.currentUserLatitude);
 

@@ -28,15 +28,16 @@ public class UserCollection {
     private Context mContext;
     private SQLiteDatabase mDatabase;
     private static User mCurrentUser;
-    private static String mCurrentUserFullName = "";
+    public static String mCurrentUserFullName = "";
 
     // These variables are used as "global" variables, for the current user session.
     // It feels hacky and not ideal; maybe refactor when possible.
     public static String profileUserEmail;
-    public static String currentUserEmail;
     public static double currentUserLongitude = 0.0;
     public static double currentUserLatitude = 0.0;
-    public static String currentUserCity = "temp";
+    public static String currentUserCity = "";
+    public static String currentUserPhone = "";
+    public static String currentUserEmail= "";
 
     public void setCurrentUser(User user) {
         Log.d(TAG, "setCurrentUser() called");
@@ -46,7 +47,6 @@ public class UserCollection {
             this.currentUserEmail = user.getEmail();
             if (this.mCurrentUser.getFirstName() != null) {
                 this.mCurrentUserFullName = mCurrentUser.getFirstName();
-                Log.d(TAG, "first name is " + this.mCurrentUserFullName);
             }
             if (this.mCurrentUser.getLastName() != null) {
                 this.mCurrentUserFullName = this.mCurrentUserFullName + " " + mCurrentUser.getLastName();

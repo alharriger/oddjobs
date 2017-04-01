@@ -28,6 +28,10 @@ public class JobCollection {
     public static UUID editJob;
     public static double currentJobLongitude = 0.0;
     public static double currentJobLatitude = 0.0;
+    public static Job currentJob;
+    public static String jobPosterName = "";
+    public static String jobPosterPhone = "";
+    public static String jobPosterEmail = "";
 
     private Context mContext;
     private SQLiteDatabase mDatabase;

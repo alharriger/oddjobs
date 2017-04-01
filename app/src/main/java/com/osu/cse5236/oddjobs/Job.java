@@ -5,16 +5,29 @@ import java.util.UUID;
 
 public class Job {
     private UUID mId;
+
+    // Instead of having three strings for each user, there should just be :
+    // private User mPoster; // Type is User, not String
+    // private User mVolunteer;
+
     private String mPoster = "";
+    private String mPosterPhone = "";
+    private String mPosterEmail = "";
+
+    private String mVolunteer = "";
+    private String mVolunteerPhone = "";
+    private String mVolunteerEmail = "";
+
     private String mTitle = "";
     private String mCompensation = "";
     private String mDescription = "";
     private Date mDate;
     private boolean mCompleted;
-    private String mVolunteer = "";
+
     private String mCity = "";
     private double mLongitude = 0;
     private double mLatitude = 0;
+
 
     public Job() {
         mId = UUID.randomUUID();
@@ -43,6 +56,22 @@ public class Job {
         this.mTitle = title;
     }
 
+    public String getPosterPhone() {
+        return mPosterPhone;
+    }
+
+    public void setPosterPhone(String phone) {
+        this.mPosterPhone = phone;
+    }
+
+    public String getPosterEmail() {
+        return mPosterEmail;
+    }
+
+    public void setPosterEmail(String email) {
+        this.mPosterEmail = email;
+    }
+
     public String getPoster() {
         return mPoster;
     }
@@ -50,6 +79,7 @@ public class Job {
     public void setPoster(String poster) {
         this.mPoster = poster;
     }
+
 
     public String getCompensation() {
         return mCompensation;
@@ -89,6 +119,22 @@ public class Job {
 
     public void setVolunteer(String volunteer) {
         this.mVolunteer = volunteer;
+    }
+
+    public String getVolunteerPhone() {
+        return mVolunteerPhone;
+    }
+
+    public void setVolunteerPhone(String phone) {
+        this.mVolunteerPhone = phone;
+    }
+
+    public String getVolunteerEmail() {
+        return mVolunteerEmail;
+    }
+
+    public void setVolunteerEmail(String email) {
+        this.mVolunteerEmail = email;
     }
 
     public String getCity() {
