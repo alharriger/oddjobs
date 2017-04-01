@@ -1,6 +1,5 @@
 package com.osu.cse5236.oddjobs;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.osu.cse5236.oddjobs.activities.EditJobActivity;
 import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.PayActivity;
-
 
 import java.util.UUID;
 
@@ -104,6 +102,12 @@ public class JobDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "View map button clicked");
+                JobCollection.currentJobLatitude = mJob.getLatitude();
+                JobCollection.currentJobLongitude = mJob.getLongitude();
+                Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
+                Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
+                Log.d(TAG, "JobCollection.currentJobLatitude is " + JobCollection.currentJobLatitude);
+                Log.d(TAG, "JobCollection.currentJobLongitude is " + JobCollection.currentJobLongitude);
                 Intent intent = new Intent(getActivity(), JobMapActivity.class);
                 startActivity(intent);
             }
@@ -154,8 +158,8 @@ public class JobDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        
 
+        // Print out all users for debugging
 //        List<User> users = UserCollection.get(getActivity()).getUsers();
 //        Log.d(TAG, "User collection:");
 //        for (User user : users) {

@@ -41,6 +41,6 @@ public class JobMapActivity extends AppCompatActivity implements OnMapReadyCallb
         LatLng jobLocation = new LatLng(UserCollection.currentUserLatitude, UserCollection.currentUserLongitude);
         mMap.addMarker(new MarkerOptions().position(jobLocation).title("Marker of job location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(jobLocation));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.5f ) );
     }
 }
