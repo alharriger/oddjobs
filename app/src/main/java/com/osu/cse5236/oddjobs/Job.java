@@ -12,8 +12,6 @@ public class Job {
     // private User mVolunteer;
 
     private UUID mPoster;
-    private String mPosterPhone = "";
-    private String mPosterEmail = "";
 
     private String mVolunteer = "";
     private String mVolunteerPhone = "";
@@ -55,22 +53,6 @@ public class Job {
 
     public void setTitle(String title) {
         this.mTitle = title;
-    }
-
-    public String getPosterPhone() {
-        return mPosterPhone;
-    }
-
-    public void setPosterPhone(String phone) {
-        this.mPosterPhone = phone;
-    }
-
-    public String getPosterEmail() {
-        return mPosterEmail;
-    }
-
-    public void setPosterEmail(String email) {
-        this.mPosterEmail = email;
     }
 
     public UUID getPoster() {

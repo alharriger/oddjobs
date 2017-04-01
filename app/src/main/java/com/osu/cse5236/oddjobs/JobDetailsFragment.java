@@ -139,12 +139,21 @@ public class JobDetailsFragment extends Fragment {
                 Log.d(TAG, "Volunteer button clicked");
                 JobCollection.currentJobLatitude = mJob.getLatitude();
                 JobCollection.currentJobLongitude = mJob.getLongitude();
-                //JobCollection.jobPosterName = mJob.getPoster();
-                JobCollection.jobPosterPhone = mJob.getPosterPhone();
-                JobCollection.jobPosterEmail = mJob.getPosterEmail();
 
-                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
-                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
+                String posterId = mJob.getPoster().toString();
+                String where = "UUID = ?";
+                String[] whereArgs= new String[1];
+                whereArgs[0] = posterId;
+                UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
+                c.moveToFirst();
+                User posterBy = c.getUser();
+
+                JobCollection.jobPosterName = posterBy.getFirstName() + " " + posterBy.getLastName();
+                JobCollection.jobPosterPhone = posterBy.getPhone();
+                JobCollection.jobPosterEmail = posterBy.getEmail();
+
+                Log.d(TAG, "mJob.getPosterPhone() is " + posterBy.getPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + posterBy.getEmail());
 
                 Log.d(TAG, "JobCollection.jobPosterPhone is " + JobCollection.jobPosterPhone);
                 Log.d(TAG, "JobCollection.jobPosterEmail is " + JobCollection.jobPosterEmail);
