@@ -1,5 +1,6 @@
 package com.osu.cse5236.oddjobs;
 
+
 import android.content.Context;
 import android.database.Cursor;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.PayActivity;
 import com.osu.cse5236.oddjobs.database.UserCursorWrapper;
 import com.osu.cse5236.oddjobs.database.UserDbSchema;
+import com.osu.cse5236.oddjobs.activities.ThankVolunteerActivity;
 
 import java.util.UUID;
 
@@ -74,7 +76,6 @@ public class JobDetailsFragment extends Fragment {
         Button mVolunteerButton;
         TextView mVolunteerView;
         Button mEditButton;
-        Button mPayButton;
         CheckBox mCompletedCheckbox;
 
         mTitleView = (TextView) v.findViewById(R.id.job_title);
@@ -91,6 +92,7 @@ public class JobDetailsFragment extends Fragment {
             c.moveToFirst();
             User user_poster = c.getUser();
             mPosterView.setText(user_poster.getFirstName() + " "+ user_poster.getLastName());
+            JobCollection.jobPosterName = user_poster.getFirstName() + " "+ user_poster.getLastName();
         }
 
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
@@ -113,6 +115,12 @@ public class JobDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "View map button clicked");
+                JobCollection.currentJobLatitude = mJob.getLatitude();
+                JobCollection.currentJobLongitude = mJob.getLongitude();
+                Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
+                Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
+                Log.d(TAG, "JobCollection.currentJobLatitude is " + JobCollection.currentJobLatitude);
+                Log.d(TAG, "JobCollection.currentJobLongitude is " + JobCollection.currentJobLongitude);
                 Intent intent = new Intent(getActivity(), JobMapActivity.class);
                 startActivity(intent);
             }
@@ -122,18 +130,35 @@ public class JobDetailsFragment extends Fragment {
             mVolunteerView.setText(mJob.getVolunteer());
         }
 
+
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
         mVolunteerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Volunteer button clicked");
-                mJob.setVolunteer(UserCollection.get(getContext()).getCurrentUserFullName());
+                JobCollection.currentJobLatitude = mJob.getLatitude();
+                JobCollection.currentJobLongitude = mJob.getLongitude();
+                //JobCollection.jobPosterName = mJob.getPoster();
+                JobCollection.jobPosterPhone = mJob.getPosterPhone();
+                JobCollection.jobPosterEmail = mJob.getPosterEmail();
 
+                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
+
+                Log.d(TAG, "JobCollection.jobPosterPhone is " + JobCollection.jobPosterPhone);
+                Log.d(TAG, "JobCollection.jobPosterEmail is " + JobCollection.jobPosterEmail);
+
+                mJob.setVolunteer(UserCollection.mCurrentUserFullName);
+                Intent intent = new Intent(getActivity(), ThankVolunteerActivity.class);
+                startActivity(intent);
             }
         });
 
-
+        mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
+        if (mJob.getVolunteer() != null) {
+            mVolunteerView.setText(UserCollection.mCurrentUserFullName);
+        }
 
         mCompletedCheckbox = (CheckBox)v.findViewById(R.id.job_completed);
         mCompletedCheckbox.setChecked(mJob.isCompleted());
@@ -156,17 +181,7 @@ public class JobDetailsFragment extends Fragment {
             }
         });
 
-        mPayButton = (Button) v.findViewById(R.id.pay_button);
-        mPayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Pay button clicked");
-                Intent intent = new Intent(getActivity(), PayActivity.class);
-                startActivity(intent);
-            }
-        });
-        
-
+        // Print out all users for debugging
 //        List<User> users = UserCollection.get(getActivity()).getUsers();
 //        Log.d(TAG, "User collection:");
 //        for (User user : users) {

@@ -22,7 +22,16 @@ public class JobCollection {
     private static final String TAG = "JobCollection RAWR";
 
     private static JobCollection sJobCollection;
-    public static UUID editJob; // not ideal; used to hold job edited in EditJobActivity
+
+    // These variables are used as "global" variables, for the current job being looked at.
+    // It feels hacky and not ideal; maybe refactor when possible.
+    public static UUID editJob;
+    public static double currentJobLongitude = 0.0;
+    public static double currentJobLatitude = 0.0;
+    public static Job currentJob;
+    public static String jobPosterName = "";
+    public static String jobPosterPhone = "";
+    public static String jobPosterEmail = "";
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
@@ -116,6 +125,8 @@ public class JobCollection {
         values.put(JobTable.Cols.UUID, job.getId().toString());
         values.put(JobTable.Cols.TITLE, job.getTitle());
         values.put(JobTable.Cols.POSTER, job.getPoster().toString());
+        values.put(JobTable.Cols.POSTER_PHONE, job.getPosterPhone());
+        values.put(JobTable.Cols.POSTER_EMAIL, job.getPosterEmail());
         values.put(JobTable.Cols.COMPENSATION, job.getCompensation());
         values.put(JobTable.Cols.DESCRIPTION, job.getDescription());
         values.put(JobTable.Cols.VOLUNTEER, job.getVolunteer());

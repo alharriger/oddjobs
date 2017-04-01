@@ -95,7 +95,7 @@ public class EditJobActivity extends AppCompatActivity {
         mUpdateJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "Edit Job button clicked");
+                Log.d(TAG, "Update Job button clicked");
                 mJob.setTitle(enteredTitle);
                 mJob.setCompensation(enteredCompensation);
                 mJob.setDescription(enteredDescription);

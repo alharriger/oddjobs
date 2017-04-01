@@ -12,15 +12,19 @@ public class JobDbSchema {
         public static final class Cols {
             public static final String UUID = "uuid";
             public static final String POSTER = "poster";
+            public static final String POSTER_PHONE = "posterPhone";
+            public static final String POSTER_EMAIL = "posterEmail";
             public static final String TITLE = "title";
             public static final String COMPENSATION = "compensation";
             public static final String DESCRIPTION = "description";
             public static final String DATE = "date";
             public static final String COMPLETED = "completed";
             public static final String VOLUNTEER = "volunteer";
-            public static final String CITY = "CITY";
-            public static final String LONGITUDE = "LONGITUDE";
-            public static final String LATITUDE = "LATITUDE";
+            public static final String VOLUNTEER_PHONE = "volunteerPhone";
+            public static final String VOLUNTEER_EMAIL = "volunteerEmail";
+            public static final String CITY = "city";
+            public static final String LONGITUDE = "longitude";
+            public static final String LATITUDE = "latitude";
         }
     }
 }

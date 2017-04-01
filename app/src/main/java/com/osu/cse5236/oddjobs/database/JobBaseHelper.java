@@ -23,11 +23,15 @@ public class JobBaseHelper extends SQLiteOpenHelper {
                 "_id integer primary key autoincrement, " +
                 JobTable.Cols.UUID + "," +
                 JobTable.Cols.POSTER + "," +
+                JobTable.Cols.POSTER_PHONE + "," +
+                JobTable.Cols.POSTER_EMAIL + "," +
                 JobTable.Cols.TITLE + "," +
                 JobTable.Cols.COMPENSATION + "," +
                 JobTable.Cols.DESCRIPTION + "," +
                 JobTable.Cols.COMPLETED + "," +
                 JobTable.Cols.VOLUNTEER + "," +
+                JobTable.Cols.VOLUNTEER_PHONE + "," +
+                JobTable.Cols.VOLUNTEER_EMAIL + "," +
                 JobTable.Cols.CITY + "," +
                 JobTable.Cols.LONGITUDE + "," +
                 JobTable.Cols.LATITUDE + "," +
