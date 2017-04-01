@@ -52,6 +52,14 @@ public class UserCollection {
                 this.mCurrentUserFullName = this.mCurrentUserFullName + " " + mCurrentUser.getLastName();
                 Log.d(TAG, "full name is " + this.mCurrentUserFullName);
             }
+            if (this.mCurrentUser.getPhone() != null) {
+                this.currentUserPhone = this.mCurrentUser.getPhone();
+                Log.d(TAG, "user phone number is " + this.currentUserPhone);
+            }
+            if (this.mCurrentUser.getEmail() != null) {
+                this.currentUserEmail = this.mCurrentUser.getEmail();
+                Log.d(TAG, "user email is " + this.currentUserEmail);
+            }
         } else {
             Log.d(TAG, "this.mCurrentUser is null");
         }

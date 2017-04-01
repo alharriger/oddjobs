@@ -29,18 +29,16 @@ public class ThankVolunteerActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_thank_volunteeer);
 
-        if (JobCollection.currentJob != null) {
-            posterNameView = (TextView) findViewById(R.id.job_poster_name);
-            posterNameView.setText(JobCollection.jobPosterName);
+        posterNameView = (TextView) findViewById(R.id.job_poster_name);
+        posterNameView.setText(JobCollection.jobPosterName);
 
-            posterPhoneView = (TextView) findViewById(R.id.job_poster_phone);
-            posterPhoneView.setText(JobCollection.jobPosterPhone);
+        posterPhoneView = (TextView) findViewById(R.id.job_poster_phone);
+        posterPhoneView.setText(JobCollection.jobPosterPhone);
 
-            posterEmailView = (TextView) findViewById(R.id.job_poster_email);
-            posterEmailView.setText(JobCollection.jobPosterEmail);
-        }
+        posterEmailView = (TextView) findViewById(R.id.job_poster_email);
+        posterEmailView.setText(JobCollection.jobPosterEmail);
 
-        okButton = (Button) findViewById(R.id.pay_button);
+        okButton = (Button) findViewById(R.id.ok_button);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

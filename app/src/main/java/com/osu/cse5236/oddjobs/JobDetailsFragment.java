@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.osu.cse5236.oddjobs.activities.EditJobActivity;
 import com.osu.cse5236.oddjobs.activities.JobMapActivity;
-import com.osu.cse5236.oddjobs.activities.PayActivity;
+import com.osu.cse5236.oddjobs.activities.ThankVolunteerActivity;
 
 import java.util.UUID;
 
@@ -70,7 +70,6 @@ public class JobDetailsFragment extends Fragment {
         Button mVolunteerButton;
         TextView mVolunteerView;
         Button mEditButton;
-        Button mPayButton;
         CheckBox mCompletedCheckbox;
 
         mTitleView = (TextView) v.findViewById(R.id.job_title);
@@ -124,8 +123,15 @@ public class JobDetailsFragment extends Fragment {
                 JobCollection.jobPosterName = mJob.getPoster();
                 JobCollection.jobPosterPhone = mJob.getPosterPhone();
                 JobCollection.jobPosterEmail = mJob.getPosterEmail();
+
+                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
+
+                Log.d(TAG, "JobCollection.jobPosterPhone is " + JobCollection.jobPosterPhone);
+                Log.d(TAG, "JobCollection.jobPosterEmail is " + JobCollection.jobPosterEmail);
+
                 mJob.setVolunteer(UserCollection.mCurrentUserFullName);
-                Intent intent = new Intent(getActivity(), JobMapActivity.class);
+                Intent intent = new Intent(getActivity(), ThankVolunteerActivity.class);
                 startActivity(intent);
             }
         });
@@ -152,16 +158,6 @@ public class JobDetailsFragment extends Fragment {
                 Intent intent = EditJobActivity.newIntent(getActivity(), mJob.getId());
                 JobCollection.editJob = mJob.getId();
                 intent.putExtra(EXTRA_JOB_ID, mJob.getId());
-                startActivity(intent);
-            }
-        });
-
-        mPayButton = (Button) v.findViewById(R.id.pay_button);
-        mPayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Pay button clicked");
-                Intent intent = new Intent(getActivity(), PayActivity.class);
                 startActivity(intent);
             }
         });
