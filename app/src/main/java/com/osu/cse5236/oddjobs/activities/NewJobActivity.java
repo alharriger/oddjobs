@@ -15,6 +15,7 @@ import com.osu.cse5236.oddjobs.Job;
 import com.osu.cse5236.oddjobs.JobCollection;
 import com.osu.cse5236.oddjobs.R;
 import com.osu.cse5236.oddjobs.UserCollection;
+import com.osu.cse5236.oddjobs.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -88,10 +89,10 @@ public class NewJobActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "Create New Job button clicked");
 
-                String userName = UserCollection.get(mContext).getCurrentUserFullName();
+                User userName = UserCollection.get(mContext).getCurrentUser();
                 Log.d(TAG, "current user's name is " + userName);
                 mJob.setTitle(enteredTitle);
-                mJob.setPoster(userName);
+                mJob.setPoster(userName.getId());
                 mJob.setDescription(enteredDescription);
                 mJob.setCompensation(enteredCompensation);
                 JobCollection.get(mContext).addJob(mJob);

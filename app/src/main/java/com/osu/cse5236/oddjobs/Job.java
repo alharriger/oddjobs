@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Job {
     private UUID mId;
-    private String mPoster = "";
+    private UUID mPoster;
     private String mTitle = "";
     private String mCompensation = "";
     private String mDescription = "";
@@ -43,11 +43,11 @@ public class Job {
         this.mTitle = title;
     }
 
-    public String getPoster() {
+    public UUID getPoster() {
         return mPoster;
     }
 
-    public void setPoster(String poster) {
+    public void setPoster(UUID poster) {
         this.mPoster = poster;
     }
 

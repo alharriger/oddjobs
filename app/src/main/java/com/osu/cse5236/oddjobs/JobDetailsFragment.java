@@ -1,6 +1,7 @@
 package com.osu.cse5236.oddjobs;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,8 @@ import android.widget.TextView;
 import com.osu.cse5236.oddjobs.activities.EditJobActivity;
 import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.PayActivity;
-
+import com.osu.cse5236.oddjobs.database.UserCursorWrapper;
+import com.osu.cse5236.oddjobs.database.UserDbSchema;
 
 import java.util.UUID;
 
@@ -81,7 +83,14 @@ public class JobDetailsFragment extends Fragment {
         mPosterView = (TextView) v.findViewById(R.id.job_poster);
         Log.d(TAG, "poster is " + mJob.getPoster());
         if (mJob.getPoster() != null) {
-            mPosterView.setText(mJob.getPoster());
+            String posterId = mJob.getPoster().toString();
+            String where = "UUID = ?";
+            String[] whereArgs= new String[1];
+            whereArgs[0] = posterId;
+            UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
+            c.moveToFirst();
+            User user_poster = c.getUser();
+            mPosterView.setText(user_poster.getFirstName() + " "+ user_poster.getLastName());
         }
 
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
@@ -108,6 +117,10 @@ public class JobDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
+        if (mJob.getVolunteer() != null) {
+            mVolunteerView.setText(mJob.getVolunteer());
+        }
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
@@ -116,13 +129,11 @@ public class JobDetailsFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "Volunteer button clicked");
                 mJob.setVolunteer(UserCollection.get(getContext()).getCurrentUserFullName());
+
             }
         });
 
-        mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
-        if (mJob.getVolunteer() != null) {
-            mVolunteerView.setText(mJob.getVolunteer());
-        }
+
 
         mCompletedCheckbox = (CheckBox)v.findViewById(R.id.job_completed);
         mCompletedCheckbox.setChecked(mJob.isCompleted());

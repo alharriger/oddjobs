@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 public class JobListActivity extends SingleFragmentActivity {
     private static final String TAG = "JobListActivity RAWR";
 
-    private LocationManager locationMangaer = null;
+    private LocationManager locationManager = null;
     private LocationListener locationListener = null;
 
     private Boolean flag = false;
@@ -53,7 +53,7 @@ public class JobListActivity extends SingleFragmentActivity {
         System.out.println("RAWR displayGpsStatus is: " + flag.toString());
         if (flag) {
             locationListener = new JobListActivity.MyLocationListener();
-            locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
@@ -71,7 +71,7 @@ public class JobListActivity extends SingleFragmentActivity {
 //                // for ActivityCompat#requestPermissions for more details.
 //                return;
 //            }
-            if (locationMangaer != null) {
+            if (locationManager != null) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // This is an auto-generated comment.
                     // TODO: Consider calling
@@ -82,7 +82,7 @@ public class JobListActivity extends SingleFragmentActivity {
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
                 }
-                locationMangaer.requestLocationUpdates(LocationManager
+                locationManager.requestLocationUpdates(LocationManager
                         .GPS_PROVIDER, 5000, 10, locationListener);
                 System.out.println("RAWR locationManager successfully accessed.");
             } else {

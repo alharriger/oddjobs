@@ -52,7 +52,13 @@ public class UserCollection {
     }
 
     public String getCurrentUserFullName() {
+        Log.d(TAG, "get current user called");
         return this.mCurrentUserFullName;
+    }
+
+    public User getCurrentUser() {
+        Log.d(TAG, "get current user called");
+        return this.mCurrentUser;
     }
 
     public static UserCollection get(Context context) {
@@ -124,7 +130,7 @@ public class UserCollection {
                 new String[] {uuidString });
     }
 
-    private UserCursorWrapper queryJobs(String whereClause, String[] whereArgs) {
+    public UserCursorWrapper queryJobs(String whereClause, String[] whereArgs) {
         Log.d(TAG, "queryUsers() called");
         Cursor cursor = mDatabase.query(
                 UserTable.NAME,
