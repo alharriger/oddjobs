@@ -63,21 +63,53 @@ public class JobListActivity extends SingleFragmentActivity {
         Log.d(TAG, "current user is " + mCurrentUser);
 
         flag = displayGpsStatus();
-        System.out.println("RAWR displayGpsStatus is: " + flag.toString());
         if (flag) {
             locationListener = new JobListActivity.MyLocationListener();
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
             }
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+            }
+        } else {
+            alertbox("Ack", "Your GPS is OFF, but it is needed for job locations.");
+        }
+    }
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    public void onResume() {
+        Log.d(TAG, "onResume called");
+        super.onResume();
+        flag = displayGpsStatus();
+        if (flag) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                if (locationManager != null) {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+//                    Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//                    try {
+//                        TimeUnit.SECONDS.sleep(1);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    UserCollection.currentUserLongitude = loc.getLongitude();
+//                    UserCollection.currentUserLatitude = loc.getLatitude();
+                } else {
+                    locationListener = new JobListActivity.MyLocationListener();
+                    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+                    }
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+                    }
+                }
             }
         } else {
             alertbox("Ack", "Your GPS is OFF, but it is needed for job locations.");
@@ -113,7 +145,7 @@ public class JobListActivity extends SingleFragmentActivity {
 
     /*----------Method to create an AlertBox ------------- */
     protected void alertbox(String title, String mymessage) {
-        Log.d(TAG, "alertbox_ called");
+        Log.d(TAG, "alertbox called");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(mymessage)
                 .setCancelable(false)
