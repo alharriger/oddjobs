@@ -40,7 +40,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class JobListActivity extends SingleFragmentActivity {
     private static final String TAG = "JobListActivity RAWR";
 
-    private LocationManager locationMangaer = null;
+    private LocationManager locationManager = null;
     private LocationListener locationListener = null;
 
     private Boolean flag = false;
@@ -66,7 +66,7 @@ public class JobListActivity extends SingleFragmentActivity {
         System.out.println("RAWR displayGpsStatus is: " + flag.toString());
         if (flag) {
             locationListener = new JobListActivity.MyLocationListener();
-            locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
@@ -79,6 +79,23 @@ public class JobListActivity extends SingleFragmentActivity {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
             }
+            if (locationManager != null) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // This is an auto-generated comment.
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                }
+                locationManager.requestLocationUpdates(LocationManager
+                        .GPS_PROVIDER, 5000, 10, locationListener);
+                System.out.println("RAWR locationManager successfully accessed.");
+            } else {
+                System.out.println("RAWR locationManager is null. :(");
+            }
         } else {
             alertbox("Oops!", "Your GPS is OFF, but it is needed for job locations.");
         }
@@ -87,11 +104,11 @@ public class JobListActivity extends SingleFragmentActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (locationMangaer != null) {
+        if (locationManager != null) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            locationMangaer.requestLocationUpdates(LocationManager
+            locationManager.requestLocationUpdates(LocationManager
                     .GPS_PROVIDER, 5000, 10, locationListener);
             System.out.println("RAWR locationManager successfully accessed.");
         } else {

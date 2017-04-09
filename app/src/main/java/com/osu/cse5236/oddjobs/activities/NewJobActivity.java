@@ -15,6 +15,7 @@ import com.osu.cse5236.oddjobs.Job;
 import com.osu.cse5236.oddjobs.JobCollection;
 import com.osu.cse5236.oddjobs.R;
 import com.osu.cse5236.oddjobs.UserCollection;
+import com.osu.cse5236.oddjobs.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -88,17 +89,11 @@ public class NewJobActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "Create New Job button clicked");
 
-                String userName = UserCollection.get(mContext).getCurrentUserFullName();
+                User userName = UserCollection.get(mContext).getCurrentUser();
                 Log.d(TAG, "current user's name is " + userName);
                 mJob.setTitle(enteredTitle);
-                mJob.setPoster(UserCollection.mCurrentUserFullName);
-                mJob.setPosterPhone(UserCollection.currentUserPhone);
-                mJob.setPosterEmail(UserCollection.currentUserEmail);
+                mJob.setPoster(userName.getId());
 
-                Log.d(TAG, "UserCollection.currentUserPhone is " + UserCollection.currentUserPhone);
-                Log.d(TAG, "UserCollection.currentUserEmail is " + UserCollection.currentUserEmail);
-                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
-                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
 
                 mJob.setDescription(enteredDescription);
                 mJob.setCompensation(enteredCompensation);
@@ -121,8 +116,6 @@ public class NewJobActivity extends AppCompatActivity {
                     if (job.getId() != null) {Log.d(TAG, "id: " + job.getId());}
                     if (job.getTitle() != null) {Log.d(TAG, "title: " + job.getTitle());}
                     if (job.getPoster() != null) {Log.d(TAG, "poster: " + job.getPoster());}
-                    if (job.getPosterPhone() != null) {Log.d(TAG, "poster phone: " + job.getPosterPhone());}
-                    if (job.getPosterEmail() != null) {Log.d(TAG, "poster email: " + job.getPosterEmail());}
                     if (job.getDescription() != null) {Log.d(TAG, "description: " + job.getDescription());}
                     if (job.getCompensation() != null) {Log.d(TAG, "compensation: " + job.getCompensation());}
                     Log.d(TAG, " ****************** ");

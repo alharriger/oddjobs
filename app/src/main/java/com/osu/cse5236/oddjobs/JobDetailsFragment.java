@@ -1,5 +1,6 @@
 package com.osu.cse5236.oddjobs;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.osu.cse5236.oddjobs.activities.EditJobActivity;
 import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.ThankVolunteerActivity;
+import com.osu.cse5236.oddjobs.database.UserCursorWrapper;
 
 import java.util.UUID;
 
@@ -78,7 +80,15 @@ public class JobDetailsFragment extends Fragment {
         mPosterView = (TextView) v.findViewById(R.id.job_poster);
         Log.d(TAG, "poster is " + mJob.getPoster());
         if (mJob.getPoster() != null) {
-            mPosterView.setText(mJob.getPoster());
+            String posterId = mJob.getPoster().toString();
+            String where = "UUID = ?";
+            String[] whereArgs= new String[1];
+            whereArgs[0] = posterId;
+            UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
+            c.moveToFirst();
+            User user_poster = c.getUser();
+            mPosterView.setText(user_poster.getFirstName() + " "+ user_poster.getLastName());
+            JobCollection.jobPosterName = user_poster.getFirstName() + " "+ user_poster.getLastName();
         }
 
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
@@ -111,6 +121,11 @@ public class JobDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
+        if (mJob.getVolunteer() != null) {
+            mVolunteerView.setText(mJob.getVolunteer());
+        }
+
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
@@ -120,12 +135,21 @@ public class JobDetailsFragment extends Fragment {
                 Log.d(TAG, "Volunteer button clicked");
                 JobCollection.currentJobLatitude = mJob.getLatitude();
                 JobCollection.currentJobLongitude = mJob.getLongitude();
-                JobCollection.jobPosterName = mJob.getPoster();
-                JobCollection.jobPosterPhone = mJob.getPosterPhone();
-                JobCollection.jobPosterEmail = mJob.getPosterEmail();
 
-                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
-                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
+                String posterId = mJob.getPoster().toString();
+                String where = "UUID = ?";
+                String[] whereArgs= new String[1];
+                whereArgs[0] = posterId;
+                UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
+                c.moveToFirst();
+                User posterBy = c.getUser();
+
+                JobCollection.jobPosterName = posterBy.getFirstName() + " " + posterBy.getLastName();
+                JobCollection.jobPosterPhone = posterBy.getPhone();
+                JobCollection.jobPosterEmail = posterBy.getEmail();
+
+                Log.d(TAG, "mJob.getPosterPhone() is " + posterBy.getPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + posterBy.getEmail());
 
                 Log.d(TAG, "JobCollection.jobPosterPhone is " + JobCollection.jobPosterPhone);
                 Log.d(TAG, "JobCollection.jobPosterEmail is " + JobCollection.jobPosterEmail);
