@@ -57,7 +57,6 @@ public class JobCollection {
 
     public void deleteJob(Job j) {
         Log.d(TAG, "deleteJob() called");
-        ContentValues values = getContentValues(j);
         mDatabase.delete(JobTable.NAME, "uuid=?", new String[] {String.valueOf(j.getId())});
     }
 
@@ -105,6 +104,15 @@ public class JobCollection {
                 new String[] {uuidString });
     }
 
+    public void updateJob(Job job, ContentValues values) {
+        Log.d(TAG, "updateJob() called");
+        String uuidString = job.getId().toString();
+
+        mDatabase.update(JobTable.NAME, values,
+                JobTable.Cols.UUID + " = ?",
+                new String[] {uuidString });
+    }
+
     private JobCursorWrapper queryJobs(String whereClause, String[] whereArgs) {
         Log.d(TAG, "queryJobs() called");
         Cursor cursor = mDatabase.query(
@@ -133,7 +141,6 @@ public class JobCollection {
         values.put(JobTable.Cols.LONGITUDE, job.getLongitude());
         values.put(JobTable.Cols.LATITUDE, job.getLatitude());
         values.put(JobTable.Cols.COMPLETED, job.isCompleted() ? 1 : 0);
-//        values.put(JobTable.Cols.DATE, job.getDate().getTime());
 
         return values;
     }
