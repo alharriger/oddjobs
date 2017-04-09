@@ -1,11 +1,8 @@
 package com.osu.cse5236.oddjobs.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.osu.cse5236.oddjobs.R;
@@ -21,25 +18,40 @@ import java.util.List;
 public class UserProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "UserProfileAct RAWR";
-    private static final String EXTRA_USER_ID = "com.osu.oddjobs.user_id";
+
+    private TextView mFirstNameView;
+    private TextView mLastNameView;
+    private TextView mPhoneView;
+    private TextView mEmailView;
+    private User mUser;
 
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        TextView mFirstNameView;
-        TextView mLastNameView;
-        TextView mPhoneView;
-        TextView mEmailView;
+        String email = UserCollection.profileUserEmail;
+
+        // test code
+        Log.d(TAG, "UserId is " + email);
+        List<User> users = UserCollection.get(UserProfileActivity.this).getUsers();
+        Log.d(TAG, "All users are: " + users);
+        Log.d(TAG, "User collection:");
+        for (User user : users) {
+            if (user.getId() != null) {Log.d(TAG, "id: " + user.getId());}
+            if (user.getFirstName() != null) {Log.d(TAG, "first name: " + user.getFirstName());}
+            if (user.getLastName() != null) {Log.d(TAG, "last name: " + user.getLastName());}
+            if (user.getPhone() != null) {Log.d(TAG, "phone: " + user.getPhone());}
+            if (user.getEmail() != null) {Log.d(TAG, "email: " + user.getEmail());}
+            if (user.getPassword() != null) {Log.d(TAG, "password: " + user.getPassword());}
+            Log.d(TAG, " *********************** ");
+        }
 
         mFirstNameView = (TextView) findViewById(R.id.user_first_name);
         mLastNameView = (TextView) findViewById(R.id.user_last_name);
         mPhoneView = (TextView) findViewById(R.id.user_phone);
         mEmailView = (TextView) findViewById(R.id.user_email);
 
-        List<User> users = UserCollection.get(UserProfileActivity.this).getUsers();
-        String email = UserCollection.profileUserEmail;
         Log.d(TAG, "email is "+ email);
         Log.d(TAG, "size of users is: " + users.size());
         for (User u : users) {
@@ -47,7 +59,6 @@ public class UserProfileActivity extends AppCompatActivity {
             Log.d(TAG, "This user email is: " + u.getEmail());
             if (u.getEmail().equals(email)) {
                 Log.d(TAG, "got into if statement: user.getEmail().equals(email)");
-                UserCollection.editProfileUser = u.getId();
                 if (u.getFirstName() != null) {
                     Log.d(TAG, "name is " + u.getFirstName());
                     mFirstNameView.setText(u.getFirstName());
@@ -67,18 +78,5 @@ public class UserProfileActivity extends AppCompatActivity {
                 break;
             }
         }
-
-        Button editProfileButton = (Button) findViewById(R.id.edit_profile_button);
-        editProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Edit button clicked");
-                Log.d(TAG, "UserCollection.editProfileUser = " + UserCollection.editProfileUser);
-                Intent intent = EditProfileActivity.newIntent(UserProfileActivity.this,
-                        UserCollection.editProfileUser);
-                intent.putExtra(EXTRA_USER_ID, UserCollection.editProfileUser);
-                startActivity(intent);
-            }
-        });
     }
 }

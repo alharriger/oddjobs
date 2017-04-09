@@ -54,10 +54,6 @@
             android:name=".activities.ThankVolunteerActivity"
             android:parentActivityName=".activities.JobListActivity">
         </activity>
-        <activity
-            android:name=".activities.EditProfileActivity"
-            android:parentActivityName=".activities.UserProfileActivity">
-        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

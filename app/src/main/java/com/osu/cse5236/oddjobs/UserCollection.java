@@ -37,8 +37,7 @@ public class UserCollection {
     public static double currentUserLatitude = 0.0;
     public static String currentUserCity = "";
     public static String currentUserPhone = "";
-    public static String currentUserEmail = "";
-    public static UUID editProfileUser;
+    public static String currentUserEmail= "";
 
     public void setCurrentUser(User user) {
         Log.d(TAG, "setCurrentUser() called");
