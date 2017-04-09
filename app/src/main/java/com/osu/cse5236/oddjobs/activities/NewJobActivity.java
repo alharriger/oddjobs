@@ -107,10 +107,10 @@ public class NewJobActivity extends AppCompatActivity {
                 mJob.setLongitude(UserCollection.currentUserLongitude);
                 mJob.setLatitude(UserCollection.currentUserLatitude);
 
-//                Log.d(TAG, "JobCollection.currentJobLatitude is " + JobCollection.currentJobLatitude);
-//                Log.d(TAG, "JobCollection.currentJobLongitude is " + JobCollection.currentJobLongitude);
-//                Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
-//                Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
+                Log.d(TAG, "UserCollection.currentUserLongitude is " + UserCollection.currentUserLongitude);
+                Log.d(TAG, "UserCollection.currentUserLatitude is " + UserCollection.currentUserLatitude);
+                Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
+                Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
 
                 JobCollection.get(mContext).addJob(mJob);
                 finish();
@@ -125,6 +125,8 @@ public class NewJobActivity extends AppCompatActivity {
                     if (job.getPosterEmail() != null) {Log.d(TAG, "poster email: " + job.getPosterEmail());}
                     if (job.getDescription() != null) {Log.d(TAG, "description: " + job.getDescription());}
                     if (job.getCompensation() != null) {Log.d(TAG, "compensation: " + job.getCompensation());}
+                    Log.d(TAG, "latitude: " + job.getLatitude());
+                    Log.d(TAG, "longitude: " + job.getLongitude());
                     Log.d(TAG, " ****************** ");
                 }
             }

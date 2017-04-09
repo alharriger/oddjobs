@@ -1,5 +1,7 @@
 package com.osu.cse5236.oddjobs;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -101,14 +103,27 @@ public class JobDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "View map button clicked");
-                JobCollection.currentJobLatitude = mJob.getLatitude();
-                JobCollection.currentJobLongitude = mJob.getLongitude();
+                Double latitude = mJob.getLatitude();
+                Double longitude = mJob.getLongitude();
+                Log.d(TAG, "mJob.getLatitude() is " + latitude);
+                Log.d(TAG, "mJob.getLongitude() is " + longitude);
+
+                Double ERROR = 0.001;
+                if (((longitude > ERROR) || (longitude < -ERROR)) && ((latitude > ERROR) || (latitude < -ERROR))) {
+                    JobCollection.currentJobLatitude = latitude;
+                    JobCollection.currentJobLongitude = longitude;
+                    Intent intent = new Intent(getActivity(), JobMapActivity.class);
+                    startActivity(intent);
+                } else {
+                    alertbox("Ack", "Sorry, the poster did not have location services on when " +
+                             "creating this. Please contact them for the location. \n\n" +
+                             mJob.getPoster() + "\n" + mJob.getPosterPhone() + "\n" +
+                             mJob.getPosterEmail());
+                }
                 Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
                 Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
                 Log.d(TAG, "JobCollection.currentJobLatitude is " + JobCollection.currentJobLatitude);
                 Log.d(TAG, "JobCollection.currentJobLongitude is " + JobCollection.currentJobLongitude);
-                Intent intent = new Intent(getActivity(), JobMapActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -176,5 +191,22 @@ public class JobDetailsFragment extends Fragment {
 //        }
 
         return v;
+    }
+
+    protected void alertbox(String title, String mymessage) {
+        Log.d(TAG, "alertbox_ called");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setMessage(mymessage)
+                .setCancelable(false)
+                .setTitle(title)
+                .setNegativeButton("Okay",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // cancel the dialog box
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

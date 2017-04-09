@@ -40,7 +40,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class JobListActivity extends SingleFragmentActivity {
     private static final String TAG = "JobListActivity RAWR";
 
-    private LocationManager locationMangaer = null;
+    private LocationManager locationManager = null;
     private LocationListener locationListener = null;
 
     private Boolean flag = false;
@@ -66,32 +66,40 @@ public class JobListActivity extends SingleFragmentActivity {
         System.out.println("RAWR displayGpsStatus is: " + flag.toString());
         if (flag) {
             locationListener = new JobListActivity.MyLocationListener();
-            locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
-            }
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+            if (locationManager != null) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+                }
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+                }
+                locationManager.requestLocationUpdates(LocationManager
+                        .GPS_PROVIDER, 5000, 10, locationListener);
+                System.out.println("RAWR locationManager successfully accessed.");
+            } else {
+                System.out.println("RAWR locationManager was null.");
             }
         } else {
-            alertbox("Oops!", "Your GPS is OFF, but it is needed for job locations.");
+            alertbox("Ack", "Your GPS is OFF, but it is needed for job locations.");
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (locationMangaer != null) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (locationManager != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "No permission!");
                 return;
             }
-            locationMangaer.requestLocationUpdates(LocationManager
+            locationManager.requestLocationUpdates(LocationManager
                     .GPS_PROVIDER, 5000, 10, locationListener);
             System.out.println("RAWR locationManager successfully accessed.");
         } else {
@@ -114,9 +122,9 @@ public class JobListActivity extends SingleFragmentActivity {
     protected void alertbox(String title, String mymessage) {
         Log.d(TAG, "alertbox_ called");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS is off, but it is needed for job locations.")
+        builder.setMessage(mymessage)
                 .setCancelable(false)
-                .setTitle("Ack")
+                .setTitle(title)
                 .setPositiveButton("Turn it on",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
