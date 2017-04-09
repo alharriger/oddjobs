@@ -13,7 +13,6 @@ import android.util.Log;
 import com.osu.cse5236.oddjobs.Job;
 import com.osu.cse5236.oddjobs.JobCollection;
 import com.osu.cse5236.oddjobs.JobDetailsFragment;
-import com.osu.cse5236.oddjobs.UserCollection;
 import com.osu.cse5236.oddjobs.R;
 
 import java.util.List;

@@ -151,8 +151,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return false;
     }
 
-
-
     /**
      * Callback received when a permissions request has been completed.
      */

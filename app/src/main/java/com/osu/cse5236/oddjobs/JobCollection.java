@@ -124,10 +124,11 @@ public class JobCollection {
         ContentValues values = new ContentValues();
         values.put(JobTable.Cols.UUID, job.getId().toString());
         values.put(JobTable.Cols.TITLE, job.getTitle());
-        values.put(JobTable.Cols.POSTER, job.getPoster().toString());
+        values.put(JobTable.Cols.POSTER, job.getPoster());
+        values.put(JobTable.Cols.POSTER_PHONE, job.getPosterPhone());
+        values.put(JobTable.Cols.POSTER_EMAIL, job.getPosterEmail());
         values.put(JobTable.Cols.COMPENSATION, job.getCompensation());
         values.put(JobTable.Cols.DESCRIPTION, job.getDescription());
-        values.put(JobTable.Cols.VOLUNTEER, job.getVolunteer());
         values.put(JobTable.Cols.CITY, job.getCity());
         values.put(JobTable.Cols.LONGITUDE, job.getCity());
         values.put(JobTable.Cols.LATITUDE, job.getCity());
