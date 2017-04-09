@@ -79,10 +79,8 @@ public class JobListActivity extends SingleFragmentActivity {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
             }
-
-
         } else {
-            alertbox("Gps Status!", "Your GPS is: OFF");
+            alertbox("Oops!", "Your GPS is OFF, but it is needed for job locations.");
         }
     }
 
@@ -114,18 +112,16 @@ public class JobListActivity extends SingleFragmentActivity {
 
     /*----------Method to create an AlertBox ------------- */
     protected void alertbox(String title, String mymessage) {
-        Log.d(TAG, "alertbox)_ called");
+        Log.d(TAG, "alertbox_ called");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your Device's GPS is Disable")
+        builder.setMessage("Your GPS is off, but it is needed for job locations.")
                 .setCancelable(false)
-                .setTitle("** Gps Status **")
-                .setPositiveButton("Gps On",
+                .setTitle("Ack")
+                .setPositiveButton("Turn it on",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // finish the current activity
-                                // AlertBoxAdvance.this.finish();
                                 Intent myIntent = new Intent(
-                                        Settings.ACTION_SECURITY_SETTINGS);
+                                        Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(myIntent);
                                 dialog.cancel();
                             }
