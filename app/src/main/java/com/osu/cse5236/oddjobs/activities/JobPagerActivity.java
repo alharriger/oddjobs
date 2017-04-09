@@ -69,36 +69,4 @@ public class JobPagerActivity extends AppCompatActivity {
             }
         }
     }
-
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "onCreate() called");
-        super.onResume();
-
-        UUID jobId = (UUID) getIntent().getSerializableExtra(EXTRA_JOB_ID);
-
-        mViewPager = (ViewPager) findViewById(R.id.job_view_pager);
-
-        mJobs = JobCollection.get(this).getJobs();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
-            @Override
-            public Fragment getItem(int position) {
-                Job job = mJobs.get(position);
-                return JobDetailsFragment.newInstance(job.getId());
-            }
-
-            @Override
-            public int getCount() {
-                return mJobs.size();
-            }
-        });
-
-        for (int i = 0; i < mJobs.size(); i++) {
-            if (mJobs.get(i).getId().equals(jobId)) {
-                mViewPager.setCurrentItem(i);
-                break;
-            }
-        }
-    }
 }
