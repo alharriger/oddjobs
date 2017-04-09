@@ -91,9 +91,21 @@ public class NewJobActivity extends AppCompatActivity {
                 String userName = UserCollection.get(mContext).getCurrentUserFullName();
                 Log.d(TAG, "current user's name is " + userName);
                 mJob.setTitle(enteredTitle);
-                mJob.setPoster(UserCollection.mCurrentUserFullName);
-                mJob.setPosterPhone(UserCollection.currentUserPhone);
-                mJob.setPosterEmail(UserCollection.currentUserEmail);
+                if (UserCollection.mCurrentUserFullName.isEmpty()) {
+                    mJob.setPoster("Jane Doe");
+                } else {
+                    mJob.setPoster(UserCollection.mCurrentUserFullName);
+                }
+                if (UserCollection.currentUserPhone.isEmpty()) {
+                    mJob.setPosterPhone("1-858-336-2875");
+                } else {
+                    mJob.setPosterPhone(UserCollection.currentUserPhone);
+                }
+                if (UserCollection.currentUserEmail.isEmpty()) {
+                    mJob.setPosterEmail("jane.doe@gmail.com");
+                } else {
+                    mJob.setPosterPhone(UserCollection.currentUserEmail);
+                }
 
                 Log.d(TAG, "UserCollection.currentUserPhone is " + UserCollection.currentUserPhone);
                 Log.d(TAG, "UserCollection.currentUserEmail is " + UserCollection.currentUserEmail);
