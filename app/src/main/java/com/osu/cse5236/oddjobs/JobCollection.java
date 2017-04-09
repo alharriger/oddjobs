@@ -57,7 +57,6 @@ public class JobCollection {
 
     public void deleteJob(Job j) {
         Log.d(TAG, "deleteJob() called");
-        ContentValues values = getContentValues(j);
         mDatabase.delete(JobTable.NAME, "uuid=?", new String[] {String.valueOf(j.getId())});
     }
 
@@ -99,6 +98,15 @@ public class JobCollection {
         Log.d(TAG, "updateJob() called");
         String uuidString = job.getId().toString();
         ContentValues values = getContentValues(job);
+
+        mDatabase.update(JobTable.NAME, values,
+                JobTable.Cols.UUID + " = ?",
+                new String[] {uuidString });
+    }
+
+    public void updateJob(Job job, ContentValues values) {
+        Log.d(TAG, "updateJob() called");
+        String uuidString = job.getId().toString();
 
         mDatabase.update(JobTable.NAME, values,
                 JobTable.Cols.UUID + " = ?",
