@@ -1,6 +1,7 @@
 package com.osu.cse5236.oddjobs.activities;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -12,8 +13,10 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,6 +29,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 /**
  * Created by Zenith on 3/25/2017.
@@ -41,7 +47,14 @@ public class JobListActivity extends SingleFragmentActivity {
 
     private String mCurrentUser = "";
 
+    /**
+     * Id to identity LOCATION permission requests.
+     */
+    private static final int REQUEST_ACCESS_COARSE_LOCATION = 0;
+    private static final int REQUEST_ACCESS_FINE_LOCATION = 0;
+
     @Override
+    @TargetApi(Build.VERSION_CODES.M)
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate called");
         super.onCreate(savedInstanceState);
@@ -59,40 +72,33 @@ public class JobListActivity extends SingleFragmentActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            if (ActivityCompat.checkSelfPermission(this,
-//                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                // TODO: Consider calling
-//                //    ActivityCompat#requestPermissions
-//                // here to request the missing permissions, and then overriding
-//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                //                                          int[] grantResults)
-//                // to handle the case where the user grants the permission. See the documentation
-//                // for ActivityCompat#requestPermissions for more details.
-//                return;
-//            }
-            if (locationMangaer != null) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // This is an auto-generated comment.
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                }
-                locationMangaer.requestLocationUpdates(LocationManager
-                        .GPS_PROVIDER, 5000, 10, locationListener);
-                System.out.println("RAWR locationManager successfully accessed.");
-            } else {
-                System.out.println("RAWR locationManager is null. :(");
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
             }
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+            }
+
 
         } else {
             alertbox("Gps Status!", "Your GPS is: OFF");
         }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (locationMangaer != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            locationMangaer.requestLocationUpdates(LocationManager
+                    .GPS_PROVIDER, 5000, 10, locationListener);
+            System.out.println("RAWR locationManager successfully accessed.");
+        } else {
+            System.out.println("RAWR locationManager was null.");
+        }
     }
 
 
