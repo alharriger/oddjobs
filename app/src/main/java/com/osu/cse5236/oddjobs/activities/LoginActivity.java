@@ -232,7 +232,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     // Use this one for testing.
-    private boolean isEmailValid(String email) {
+    public static boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
 
         return email.contains("@");
