@@ -136,7 +136,7 @@ public class NewUserActivity extends AppCompatActivity {
                 Log.d(TAG, "User email set to: " + enteredEmail);
                 if (enteredPassword != null) {
                     if (enteredPassword.equals(enteredConfirmPassword)) {
-                        mUser.setPassword(enteredPassword);
+                        mUser.setPassword(LoginActivity.hashPassword(enteredPassword));
                         Log.d(TAG, "Passwords matched.");
                     } else {
                         Log.d(TAG, "Passwords did not match.");

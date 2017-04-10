@@ -15,7 +15,6 @@ import com.osu.cse5236.oddjobs.Job;
 import com.osu.cse5236.oddjobs.JobCollection;
 import com.osu.cse5236.oddjobs.R;
 import com.osu.cse5236.oddjobs.UserCollection;
-import com.osu.cse5236.oddjobs.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -89,11 +88,29 @@ public class NewJobActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "Create New Job button clicked");
 
-                User userName = UserCollection.get(mContext).getCurrentUser();
+                String userName = UserCollection.get(mContext).getCurrentUserFullName();
                 Log.d(TAG, "current user's name is " + userName);
                 mJob.setTitle(enteredTitle);
-                mJob.setPoster(userName.getId());
+                if (UserCollection.mCurrentUserFullName.isEmpty()) {
+                    mJob.setPoster("Jane Doe");
+                } else {
+                    mJob.setPoster(UserCollection.mCurrentUserFullName);
+                }
+                if (UserCollection.currentUserPhone.isEmpty()) {
+                    mJob.setPosterPhone("1-858-336-2875");
+                } else {
+                    mJob.setPosterPhone(UserCollection.currentUserPhone);
+                }
+                if (UserCollection.currentUserEmail.isEmpty()) {
+                    mJob.setPosterEmail("jane.doe@gmail.com");
+                } else {
+                    mJob.setPosterPhone(UserCollection.currentUserEmail);
+                }
 
+                Log.d(TAG, "UserCollection.currentUserPhone is " + UserCollection.currentUserPhone);
+                Log.d(TAG, "UserCollection.currentUserEmail is " + UserCollection.currentUserEmail);
+                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
 
                 mJob.setDescription(enteredDescription);
                 mJob.setCompensation(enteredCompensation);
@@ -102,10 +119,10 @@ public class NewJobActivity extends AppCompatActivity {
                 mJob.setLongitude(UserCollection.currentUserLongitude);
                 mJob.setLatitude(UserCollection.currentUserLatitude);
 
-//                Log.d(TAG, "JobCollection.currentJobLatitude is " + JobCollection.currentJobLatitude);
-//                Log.d(TAG, "JobCollection.currentJobLongitude is " + JobCollection.currentJobLongitude);
-//                Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
-//                Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
+                Log.d(TAG, "UserCollection.currentUserLongitude is " + UserCollection.currentUserLongitude);
+                Log.d(TAG, "UserCollection.currentUserLatitude is " + UserCollection.currentUserLatitude);
+                Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
+                Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
 
                 JobCollection.get(mContext).addJob(mJob);
                 finish();
@@ -116,8 +133,12 @@ public class NewJobActivity extends AppCompatActivity {
                     if (job.getId() != null) {Log.d(TAG, "id: " + job.getId());}
                     if (job.getTitle() != null) {Log.d(TAG, "title: " + job.getTitle());}
                     if (job.getPoster() != null) {Log.d(TAG, "poster: " + job.getPoster());}
+                    if (job.getPosterPhone() != null) {Log.d(TAG, "poster phone: " + job.getPosterPhone());}
+                    if (job.getPosterEmail() != null) {Log.d(TAG, "poster email: " + job.getPosterEmail());}
                     if (job.getDescription() != null) {Log.d(TAG, "description: " + job.getDescription());}
                     if (job.getCompensation() != null) {Log.d(TAG, "compensation: " + job.getCompensation());}
+                    Log.d(TAG, "latitude: " + job.getLatitude());
+                    Log.d(TAG, "longitude: " + job.getLongitude());
                     Log.d(TAG, " ****************** ");
                 }
             }

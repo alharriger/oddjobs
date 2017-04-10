@@ -13,6 +13,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -43,8 +45,6 @@ public class JobListActivity extends SingleFragmentActivity {
     private LocationManager locationManager = null;
     private LocationListener locationListener = null;
 
-    private Boolean flag = false;
-
     private String mCurrentUser = "";
 
     /**
@@ -61,43 +61,57 @@ public class JobListActivity extends SingleFragmentActivity {
 
         mCurrentUser = UserCollection.get(this).getCurrentUserFullName();
         Log.d(TAG, "current user is " + mCurrentUser);
-
-        flag = displayGpsStatus();
-        System.out.println("RAWR displayGpsStatus is: " + flag.toString());
-        if (flag) {
-            locationListener = new JobListActivity.MyLocationListener();
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
-            }
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
-            }
-            if (locationManager != null) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // This is an auto-generated comment.
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                }
-                locationManager.requestLocationUpdates(LocationManager
-                        .GPS_PROVIDER, 5000, 10, locationListener);
-                System.out.println("RAWR locationManager successfully accessed.");
-            } else {
-                System.out.println("RAWR locationManager is null. :(");
-            }
+        if (!networkEnabled()) {
+            alertbox("Ack", "Your Wi-Fi is OFF, but it is needed for job locations.", Settings.ACTION_WIFI_SETTINGS);
         } else {
-            alertbox("Oops!", "Your GPS is OFF, but it is needed for job locations.");
+            if (gpsEnabled()) {
+                locationListener = new JobListActivity.MyLocationListener();
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+                }
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+                }
+            } else {
+                alertbox("Ack", "Your GPS is OFF, but it is needed for job locations.", Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            }
+        }
+
+    }
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    public void onResume() {
+        Log.d(TAG, "onResume called");
+        super.onResume();
+        if (!networkEnabled()) {
+            alertbox("Ack", "Your network is OFF, but it is needed for job locations.", Settings.ACTION_WIFI_SETTINGS);
+        } else {
+            if (gpsEnabled()) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    if (locationManager != null) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+                    } else {
+                        locationListener = new JobListActivity.MyLocationListener();
+                        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+                        }
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{ACCESS_COARSE_LOCATION}, REQUEST_ACCESS_COARSE_LOCATION);
+                        }
+                    }
+                }
+            } else {
+                alertbox("Ack", "Your GPS is OFF, but it is needed for job locations.", Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            }
+
         }
     }
 
@@ -105,7 +119,8 @@ public class JobListActivity extends SingleFragmentActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (locationManager != null) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "No permission!");
                 return;
             }
             locationManager.requestLocationUpdates(LocationManager
@@ -116,10 +131,9 @@ public class JobListActivity extends SingleFragmentActivity {
         }
     }
 
-
-    /*----Method to Check GPS is enable or disable ----- */
-    private Boolean displayGpsStatus() {
-        Log.d(TAG, "displayGpsStatus called");
+    /*----Method to check if GPS is enabled or disabled ----- */
+    private Boolean gpsEnabled() {
+        Log.d(TAG, "gpsEnabled called");
         ContentResolver contentResolver = getBaseContext()
                 .getContentResolver();
         return Settings.Secure
@@ -127,18 +141,26 @@ public class JobListActivity extends SingleFragmentActivity {
                         LocationManager.GPS_PROVIDER);
     }
 
+    /*----Method to check if the network is enabled or disabled ----- */
+    private Boolean networkEnabled() {
+        Log.d(TAG, "networkEnabled called");
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
     /*----------Method to create an AlertBox ------------- */
-    protected void alertbox(String title, String mymessage) {
-        Log.d(TAG, "alertbox_ called");
+    protected void alertbox(String title, String mymessage, final String action) {
+        Log.d(TAG, "alertbox called");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS is off, but it is needed for job locations.")
+        builder.setMessage(mymessage)
                 .setCancelable(false)
-                .setTitle("Ack")
+                .setTitle(title)
                 .setPositiveButton("Turn it on",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Intent myIntent = new Intent(
-                                        Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                Intent myIntent = new Intent(action);
                                 startActivity(myIntent);
                                 dialog.cancel();
                             }

@@ -34,6 +34,8 @@ import com.osu.cse5236.oddjobs.R;
 import com.osu.cse5236.oddjobs.User;
 import com.osu.cse5236.oddjobs.UserCollection;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -151,8 +153,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return false;
     }
 
-
-
     /**
      * Callback received when a permissions request has been completed.
      */
@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     // Use this one for testing.
-    private boolean isEmailValid(String email) {
+    public static boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
 
         return email.contains("@");
@@ -371,7 +371,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     UserCollection.get(LoginActivity.this).setCurrentUser(user);
                     // Account exists, return true if the password matches.
                     if (user.getPassword() != null ) {
-                        return user.getPassword().equals(mPassword);
+                        return user.getPassword().equals(hashPassword(mPassword));
                     } else {
                         System.out.println(TAG + " Password is null!");
                     }
@@ -441,6 +441,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
+    }
+
+    public static String hashPassword(String password) {
+        MessageDigest messageDigest;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(password.getBytes());
+            return new String(messageDigest.digest());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
 

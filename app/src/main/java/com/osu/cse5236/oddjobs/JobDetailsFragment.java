@@ -1,6 +1,7 @@
 package com.osu.cse5236.oddjobs;
 
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 import com.osu.cse5236.oddjobs.activities.EditJobActivity;
 import com.osu.cse5236.oddjobs.activities.JobMapActivity;
 import com.osu.cse5236.oddjobs.activities.ThankVolunteerActivity;
-import com.osu.cse5236.oddjobs.database.UserCursorWrapper;
 
 import java.util.UUID;
 
@@ -80,15 +80,7 @@ public class JobDetailsFragment extends Fragment {
         mPosterView = (TextView) v.findViewById(R.id.job_poster);
         Log.d(TAG, "poster is " + mJob.getPoster());
         if (mJob.getPoster() != null) {
-            String posterId = mJob.getPoster().toString();
-            String where = "UUID = ?";
-            String[] whereArgs= new String[1];
-            whereArgs[0] = posterId;
-            UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
-            c.moveToFirst();
-            User user_poster = c.getUser();
-            mPosterView.setText(user_poster.getFirstName() + " "+ user_poster.getLastName());
-            JobCollection.jobPosterName = user_poster.getFirstName() + " "+ user_poster.getLastName();
+            mPosterView.setText(mJob.getPoster());
         }
 
         mCompensationView = (TextView) v.findViewById(R.id.job_compensation);
@@ -111,21 +103,29 @@ public class JobDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "View map button clicked");
-                JobCollection.currentJobLatitude = mJob.getLatitude();
-                JobCollection.currentJobLongitude = mJob.getLongitude();
+                Double latitude = mJob.getLatitude();
+                Double longitude = mJob.getLongitude();
+                Log.d(TAG, "mJob.getLatitude() is " + latitude);
+                Log.d(TAG, "mJob.getLongitude() is " + longitude);
+
+                Double ERROR = 0.001;
+                if (((longitude > ERROR) || (longitude < -ERROR)) && ((latitude > ERROR) || (latitude < -ERROR))) {
+                    JobCollection.currentJobLatitude = latitude;
+                    JobCollection.currentJobLongitude = longitude;
+                    Intent intent = new Intent(getActivity(), JobMapActivity.class);
+                    startActivity(intent);
+                } else {
+                    alertbox("Ack", "Sorry, the poster did not have location services on when " +
+                             "creating this. Please contact them for the location. \n\n" +
+                             mJob.getPoster() + "\n" + mJob.getPosterPhone() + "\n" +
+                             mJob.getPosterEmail());
+                }
                 Log.d(TAG, "mJob.getLatitude() is " + mJob.getLatitude());
                 Log.d(TAG, "mJob.getLongitude() is " + mJob.getLongitude());
                 Log.d(TAG, "JobCollection.currentJobLatitude is " + JobCollection.currentJobLatitude);
                 Log.d(TAG, "JobCollection.currentJobLongitude is " + JobCollection.currentJobLongitude);
-                Intent intent = new Intent(getActivity(), JobMapActivity.class);
-                startActivity(intent);
             }
         });
-        mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
-        if (mJob.getVolunteer() != null) {
-            mVolunteerView.setText(mJob.getVolunteer());
-        }
-
 
         mVolunteerButton = (Button) v.findViewById(R.id.volunteer_button);
         mVolunteerButton.setEnabled(true);
@@ -135,21 +135,12 @@ public class JobDetailsFragment extends Fragment {
                 Log.d(TAG, "Volunteer button clicked");
                 JobCollection.currentJobLatitude = mJob.getLatitude();
                 JobCollection.currentJobLongitude = mJob.getLongitude();
+                JobCollection.jobPosterName = mJob.getPoster();
+                JobCollection.jobPosterPhone = mJob.getPosterPhone();
+                JobCollection.jobPosterEmail = mJob.getPosterEmail();
 
-                String posterId = mJob.getPoster().toString();
-                String where = "UUID = ?";
-                String[] whereArgs= new String[1];
-                whereArgs[0] = posterId;
-                UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
-                c.moveToFirst();
-                User posterBy = c.getUser();
-
-                JobCollection.jobPosterName = posterBy.getFirstName() + " " + posterBy.getLastName();
-                JobCollection.jobPosterPhone = posterBy.getPhone();
-                JobCollection.jobPosterEmail = posterBy.getEmail();
-
-                Log.d(TAG, "mJob.getPosterPhone() is " + posterBy.getPhone());
-                Log.d(TAG, "mJob.getPosterEmail() is " + posterBy.getEmail());
+                Log.d(TAG, "mJob.getPosterPhone() is " + mJob.getPosterPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + mJob.getPosterEmail());
 
                 Log.d(TAG, "JobCollection.jobPosterPhone is " + JobCollection.jobPosterPhone);
                 Log.d(TAG, "JobCollection.jobPosterEmail is " + JobCollection.jobPosterEmail);
@@ -200,5 +191,22 @@ public class JobDetailsFragment extends Fragment {
 //        }
 
         return v;
+    }
+
+    protected void alertbox(String title, String mymessage) {
+        Log.d(TAG, "alertbox_ called");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setMessage(mymessage)
+                .setCancelable(false)
+                .setTitle(title)
+                .setNegativeButton("Okay",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // cancel the dialog box
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

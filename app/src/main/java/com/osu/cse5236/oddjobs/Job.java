@@ -6,12 +6,13 @@ import java.util.UUID;
 public class Job {
     private UUID mId;
 
-
     // Instead of having three strings for each user, there should just be :
     // private User mPoster; // Type is User, not String
     // private User mVolunteer;
 
-    private UUID mPoster;
+    private String mPoster = "";
+    private String mPosterPhone = "";
+    private String mPosterEmail = "";
 
     private String mVolunteer = "";
     private String mVolunteerPhone = "";
@@ -55,11 +56,27 @@ public class Job {
         this.mTitle = title;
     }
 
-    public UUID getPoster() {
+    public String getPosterPhone() {
+        return mPosterPhone;
+    }
+
+    public void setPosterPhone(String phone) {
+        this.mPosterPhone = phone;
+    }
+
+    public String getPosterEmail() {
+        return mPosterEmail;
+    }
+
+    public void setPosterEmail(String email) {
+        this.mPosterEmail = email;
+    }
+
+    public String getPoster() {
         return mPoster;
     }
 
-    public void setPoster(UUID poster) {
+    public void setPoster(String poster) {
         this.mPoster = poster;
     }
 

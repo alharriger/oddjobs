@@ -26,6 +26,8 @@ public class JobCursorWrapper extends CursorWrapper {
         String uuidString = getString(getColumnIndex(JobTable.Cols.UUID));
         String title = getString(getColumnIndex(JobTable.Cols.TITLE));
         String poster = getString(getColumnIndex(JobTable.Cols.POSTER));
+        String posterPhone = getString(getColumnIndex(JobTable.Cols.POSTER_PHONE));
+        String posterEmail = getString(getColumnIndex(JobTable.Cols.POSTER_EMAIL));
         String description = getString(getColumnIndex(JobTable.Cols.DESCRIPTION));
         String compensation = getString(getColumnIndex(JobTable.Cols.COMPENSATION));
         String city = getString(getColumnIndex(JobTable.Cols.CITY));
@@ -39,7 +41,9 @@ public class JobCursorWrapper extends CursorWrapper {
 
         Job job = new Job(UUID.fromString(uuidString));
         job.setTitle(title);
-        job.setPoster(UUID.fromString(poster));
+        job.setPoster(poster);
+        job.setPosterPhone(posterPhone);
+        job.setPosterEmail(posterEmail);
         job.setDescription(description);
         job.setCompensation(compensation);
         job.setCity(city);

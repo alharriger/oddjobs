@@ -1,6 +1,5 @@
 package com.osu.cse5236.oddjobs.database;
 
-import com.osu.cse5236.oddjobs.User;
 /**
  * Created by Zenith on 3/26/2017.
  */
