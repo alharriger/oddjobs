@@ -90,7 +90,7 @@ public class NewJobActivity extends AppCompatActivity {
                 Log.d(TAG, "Create New Job button clicked");
 
                 User userName = UserCollection.get(mContext).getCurrentUser();
-                Log.d(TAG, "current user's name is " + userName);
+                Log.d(TAG, "current user's name is " + userName.getId());
                 mJob.setTitle(enteredTitle);
                 mJob.setPoster(userName.getId());
 

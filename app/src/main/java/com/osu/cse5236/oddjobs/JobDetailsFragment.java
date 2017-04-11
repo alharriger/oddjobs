@@ -122,8 +122,11 @@ public class JobDetailsFragment extends Fragment {
             }
         });
         mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
-        if (mJob.getVolunteer() != null) {
-            mVolunteerView.setText(mJob.getVolunteer());
+        Log.d(TAG, "volunteer is " + mJob.getVolunteer());
+        if (!mJob.getVolunteer().isEmpty()) {
+            String userId = mJob.getVolunteer();
+            User volunteer = UserCollection.get(getContext()).getUser(UUID.fromString(userId));
+            mVolunteerView.setText(volunteer.getFirstName() + " " + volunteer.getLastName());
         }
 
 
@@ -142,27 +145,31 @@ public class JobDetailsFragment extends Fragment {
                 whereArgs[0] = posterId;
                 UserCursorWrapper c = UserCollection.get(getContext()).queryJobs(where, whereArgs);
                 c.moveToFirst();
-                User posterBy = c.getUser();
+                User postedBy = c.getUser();
 
-                JobCollection.jobPosterName = posterBy.getFirstName() + " " + posterBy.getLastName();
-                JobCollection.jobPosterPhone = posterBy.getPhone();
-                JobCollection.jobPosterEmail = posterBy.getEmail();
+                JobCollection.jobPosterName = postedBy.getFirstName() + " " + postedBy.getLastName();
+                JobCollection.jobPosterPhone = postedBy.getPhone();
+                JobCollection.jobPosterEmail = postedBy.getEmail();
 
-                Log.d(TAG, "mJob.getPosterPhone() is " + posterBy.getPhone());
-                Log.d(TAG, "mJob.getPosterEmail() is " + posterBy.getEmail());
+                Log.d(TAG, "mJob.getPosterPhone() is " + postedBy.getPhone());
+                Log.d(TAG, "mJob.getPosterEmail() is " + postedBy.getEmail());
 
                 Log.d(TAG, "JobCollection.jobPosterPhone is " + JobCollection.jobPosterPhone);
                 Log.d(TAG, "JobCollection.jobPosterEmail is " + JobCollection.jobPosterEmail);
 
-                mJob.setVolunteer(UserCollection.mCurrentUserFullName);
+                User user = UserCollection.get(getContext()).getCurrentUser();
+                mJob.setVolunteer(user.getId().toString());
                 Intent intent = new Intent(getActivity(), ThankVolunteerActivity.class);
                 startActivity(intent);
             }
         });
 
         mVolunteerView = (TextView) v.findViewById(R.id.job_volunteer);
-        if (mJob.getVolunteer() != null) {
-            mVolunteerView.setText(UserCollection.mCurrentUserFullName);
+        Log.d(TAG, "volunteer is " + mJob.getVolunteer());
+        if (!mJob.getVolunteer().isEmpty()) {
+            String userId = mJob.getVolunteer();
+            User volunteer = UserCollection.get(getContext()).getUser(UUID.fromString(userId));
+            mVolunteerView.setText(volunteer.getFirstName() + " " + volunteer.getLastName());
         }
 
         mCompletedCheckbox = (CheckBox)v.findViewById(R.id.job_completed);

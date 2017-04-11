@@ -14,8 +14,6 @@ public class Job {
     private UUID mPoster;
 
     private String mVolunteer = "";
-    private String mVolunteerPhone = "";
-    private String mVolunteerEmail = "";
 
     private String mTitle = "";
     private String mCompensation = "";
@@ -102,22 +100,6 @@ public class Job {
 
     public void setVolunteer(String volunteer) {
         this.mVolunteer = volunteer;
-    }
-
-    public String getVolunteerPhone() {
-        return mVolunteerPhone;
-    }
-
-    public void setVolunteerPhone(String phone) {
-        this.mVolunteerPhone = phone;
-    }
-
-    public String getVolunteerEmail() {
-        return mVolunteerEmail;
-    }
-
-    public void setVolunteerEmail(String email) {
-        this.mVolunteerEmail = email;
     }
 
     public String getCity() {
