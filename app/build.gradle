@@ -50,6 +50,7 @@ dependencies {
 dependencies {
     compile 'com.google.android.gms:play-services-maps:+'
     compile 'com.android.support:appcompat-v7:23.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 android {
     useLibrary 'org.apache.http.legacy'
